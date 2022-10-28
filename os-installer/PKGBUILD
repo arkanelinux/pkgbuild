@@ -11,13 +11,13 @@ depends=('gnome-desktop' 'gtk4' 'libadwaita' 'libgweather-4' 'python-yaml' 'udis
 sha256sums=(SKIP)
 
 build () {
-  cd "$pkgname"
+	cd "$pkgname"
 	
 	meson build
 }
 
 package() {
-  cd "$srcdir/$pkgname"
+	cd "$srcdir/$pkgname"
 
 	sudo meson install -C build --destdir $pkgdir
 }
