@@ -4,4 +4,4 @@ pkg
 .PKGINFO
 .MTREE
 /os-installer/os-installer
-/os-installed/src
+/os-installer/src
