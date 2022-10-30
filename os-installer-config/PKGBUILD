@@ -1,23 +1,15 @@
 pkgname=os-installer
 pkgver=0.1
 pkgrel=1
-pkgdesc='Operating system installer by the GNOME project'
-url='https://gitlab.gnome.org/p3732/os-installer'
-source=("git+https://gitlab.gnome.org/p3732/os-installer.git")
+pkgdesc='Default Arkane Linux configuration files for the os-installer'
+url='https://github.com/arkanelinux/pkgbuild/tree/main/os-installer-config'
 arch=('x86_64')
-license=('GPL-3.0-or-later')
-makedepends=('gnome-desktop' 'gtk4' 'libadwaita' 'libgweather-4' 'python-yaml' 'udisks2' 'vte4' 'meson')
-depends=('gnome-desktop' 'gtk4' 'libadwaita' 'libgweather-4' 'python-yaml' 'udisks2' 'vte4' 'epiphany' 'gnome-disk-utility' 'gnome-control-center')
+license=('Public domain')
+makedepends=()
+depends=('os-installer')
 sha256sums=(SKIP)
 
-build () {
-	cd "$pkgname"
-	
-	meson build
-}
-
 package() {
-	cd "$srcdir/$pkgname"
-
-	sudo meson install -C build --destdir $pkgdir
+	mkdir -p $pkgdir/etc/os-release
+	cp -r $srcdir/* $pkgdir/etc/os-release
 }
