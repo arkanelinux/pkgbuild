@@ -7,7 +7,7 @@ This repo contains the PKGBUILD files for all packages available in the [Arkane 
 git clone https://github.com/arkanelinux/pkgbuild.git
 ```
 ### 2. Build the package
-It is a good habbit to always inspect the PKGBUILd files, irrelevant of the source. It takes just a few minutes and can save you from your system getting rm -rf-ed.
+It is a good habit to always inspect the PKGBUILd files, irrelevant of the source. It takes just a few minutes and can save you from your system getting rm -rf-ed.
 ```
 cd pkgbuild/os-installer
 makepkg
@@ -27,7 +27,10 @@ Refer to the ArchWiki page on [PKGBUILD](https://wiki.archlinux.org/title/PKGBUI
 Always use the original developer's primary repository or mirror as a software source.
 
 ### Software versions
-Always use stable point releases in source-code form. Git versions or binaries should be avoided with rare exceptions.
+Always use stable point releases. Git versions should be avoided with rare exceptions.
+
+### Binaries
+Avoid binaries if possible, preferably always build the software from source.
 
 ### Including source code inside of this reposity
 Only tiny scripts or configuration files should be added in `package_name/src`, large pieces of software should pull their code or binaries from external sources.
