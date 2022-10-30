@@ -19,11 +19,10 @@ repo-add arkane.db.tar.zst ./os-installer/os-installer-1.0-1-x86_64.pkg.tar.zst
 ```
 
 ## Scripts
-### push-all.sh
-Pushes all packages to the repositories, useless for everyone other than those with access to the repository server.
-
-### clear-old.sh
-Removes the arkane.db.old files created after updating the database.
+| Script				| Description																																																						|
+| -------------	| ---------------------------------------------------------------------------------------------------------------------	|
+| push-all.sh		| Pushes all packages to the repositories, useless for everyone other than those with access to the repository server.	|
+| clear-old.sh	| Removes the arkane.db.old files created after updating the database.																									|
 
 ## Development
 Contributions, in any form, be it code or ideas are always welcome!
