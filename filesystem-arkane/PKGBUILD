@@ -3,12 +3,13 @@
 
 pkgname=filesystem-arkane
 pkgver=2022.10.18
-pkgrel=1
+pkgrel=2
 pkgdesc='Base Arkane Linux files'
 arch=('x86_64')
 license=('GPL')
 url='https://github.com/arkanelinux/pkgbuild/tree/main/filesystem-arkane'
 depends=('iana-etc')
+conflicts=('filesystem')
 backup=('etc/crypttab' 'etc/fstab' 'etc/group' 'etc/gshadow' 'etc/host.conf'
         'etc/hosts' 'etc/issue' 'etc/ld.so.conf' 'etc/nsswitch.conf'
         'etc/passwd' 'etc/profile' 'etc/resolv.conf' 'etc/securetty'
