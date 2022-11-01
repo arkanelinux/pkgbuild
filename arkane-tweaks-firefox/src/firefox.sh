@@ -1,1 +1,0 @@
-/home/dennis/Projecten/pkgbuild/arkane-tweaks-firefox/firefox.sh
