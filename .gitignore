@@ -3,5 +3,5 @@ pkg
 .BUILDINFO
 .PKGINFO
 .MTREE
+/*/src
 /os-installer/os-installer
-/os-installer/src
