@@ -39,4 +39,4 @@ Always use stable point releases. Git versions should be avoided with rare excep
 Avoid binaries if possible, preferably always build the software from source.
 
 ### Including source code inside of this repository
-Only tiny scripts or configuration files should be added in `package_name/src`, large pieces of software should pull their code or binaries from external sources.
+Only tiny scripts or configuration files should be added in `package_name`, large pieces of software should pull their code or binaries from external sources.
