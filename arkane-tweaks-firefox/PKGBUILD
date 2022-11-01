@@ -1,14 +1,16 @@
 pkgname=arkane-tweaks-firefox
 pkgver=1.0
-pkgrel=1
+pkgrel=2
 pkgdesc='Currently relevant tweaks for Firefox such as Wayland enablement'
 url='https://github.com/arkanelinux/pkgbuild/tree/main/arkane-tweaks-firefox'
 arch=('any')
 license=('Public domain')
 makedepends=()
 depends=('firefox')
+source=('firefox.sh')
+sha256sums=('3b12a7a752dd73b05b9e0e54d4135ef64a4c7449ce686d3a7c793cfe7ce48635')
 
 package() {
-	mkdir -p $pkgdir/etc/profile.d
-	cp $srcdir/firefox.sh $pkgdir/etc/profile.d/
+	install -d "$pkgdir"/etc/profile.d/
+	install -m644 "$srcdir"/firefox.sh "$pkgdir"/etc/profile.d/
 }

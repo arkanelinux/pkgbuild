@@ -1,1 +1,1 @@
-export MOZ_ENABLE_WAYLAND=1
+/home/dennis/Projecten/pkgbuild/arkane-tweaks-firefox/firefox.sh
