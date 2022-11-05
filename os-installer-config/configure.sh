@@ -48,4 +48,8 @@ sudo cp /etc/os-installer/bits/systemd-boot/loader.conf /mnt/boot/loader/
 sudo sed -i 's/#\ %wheel\ ALL=(ALL:ALL)\ ALL/%wheel\ ALL=(ALL:ALL)\ ALL/g' /mnt/etc/sudoers
 echo "LANG=en_US.UTF-8" | sudo tee /mnt/etc/locale.conf
 
+# Ensure synced and umount
+sync
+sudo umount -R /mnt
+
 exit 0
