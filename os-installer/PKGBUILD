@@ -7,7 +7,11 @@ source=("git+https://gitlab.gnome.org/p3732/os-installer.git")
 arch=('x86_64')
 license=('GPL-3.0-or-later')
 makedepends=('gnome-desktop' 'gtk4' 'libadwaita' 'libgweather-4' 'python-yaml' 'udisks2' 'vte4' 'meson')
-depends=('gnome-desktop' 'gtk4' 'libadwaita' 'libgweather-4' 'python-yaml' 'udisks2' 'vte4' 'epiphany' 'gnome-disk-utility' 'gnome-control-center')
+depends=('gnome-desktop' 'gtk4' 'libadwaita' 'libgweather-4' 'python-yaml' 'udisks2' 'vte4')
+optdepends=('epiphany: online assistance'
+						'firefox: online assistance'
+						'gnome-disk-utility: manual disk partitioning' 
+						'gnome-control-center: Wi-Fi setup')
 sha256sums=(SKIP)
 
 build () {
@@ -19,5 +23,5 @@ build () {
 package() {
 	cd "$srcdir/$pkgname"
 
-	sudo meson install -C build --destdir $pkgdir
+	meson install -C build --destdir $pkgdir
 }
