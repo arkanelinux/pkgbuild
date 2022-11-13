@@ -35,16 +35,15 @@ while read i; do
 done < /etc/os-installer/bits/systemd.services
 
 # Generate locales
-sudo cp /etc/locale.gen /mnt/etc/locale.gen
+sudo cp -v /etc/locale.gen /mnt/etc/locale.gen
 sudo arch-chroot /mnt locale-gen
 
 # Apply configuration tweaks
-echo "Applying configuration..."
-sudo cp /etc/os-installer/bits/gdm/custom.conf /mnt/etc/gdm/custom.conf
+sudo cp -v /etc/os-installer/bits/gdm/custom.conf /mnt/etc/gdm/custom.conf
 sudo arch-chroot /mnt chown gdm:gdm /etc/gdm/custom.conf
-sudo cp /etc/os-installer/bits/systemd-boot/arkane.conf /mnt/boot/loader/entries/
-sudo cp /etc/os-installer/bits/systemd-boot/arkane-fallback.conf /mnt/boot/loader/entries/
-sudo cp /etc/os-installer/bits/systemd-boot/loader.conf /mnt/boot/loader/
+sudo cp -v /etc/os-installer/bits/systemd-boot/arkane.conf /mnt/boot/loader/entries/
+sudo cp -v /etc/os-installer/bits/systemd-boot/arkane-fallback.conf /mnt/boot/loader/entries/
+sudo cp -v /etc/os-installer/bits/systemd-boot/loader.conf /mnt/boot/loader/
 sudo sed -i 's/#\ %wheel\ ALL=(ALL:ALL)\ ALL/%wheel\ ALL=(ALL:ALL)\ ALL/g' /mnt/etc/sudoers
 echo "LANG=en_US.UTF-8" | sudo tee /mnt/etc/locale.conf
 

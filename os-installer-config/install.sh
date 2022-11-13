@@ -23,47 +23,31 @@ then
 fi
 
 # Partition the disk
-echo "Writing partition scheme to ${OSI_DEVICE_PATH}..."
 sudo sfdisk $OSI_DEVICE_PATH < /etc/os-installer/bits/part.sfdisk
 
 # Create filesystems on the created disk
-echo "Partitioning ${OSI_DEVICE_PATH}1 with FAT32..."
 sudo mkfs.fat -F32 ${OSI_DEVICE_PATH}1
-
-echo "Partitioning ${OSI_DEVICE_PATH}2 with Swap..."
 sudo mkswap ${OSI_DEVICE_PATH}2
-
-echo "Partitioning ${OSI_DEVICE_PATH}3 with Btrfs..."
 sudo mkfs.btrfs -L arkane_root ${OSI_DEVICE_PATH}3
 
 # Mount partitions to /mnt and activate swap
-echo "Mounting ${OSI_DEVICE_PATH}3 as root..."
 sudo mount -o compress=zstd ${OSI_DEVICE_PATH}3 /mnt
-
-echo "Mounting ${OSI_DEVICE_PATH}1 as boot..."
 sudo mount --mkdir ${OSI_DEVICE_PATH}1 /mnt/boot
-
-echo "Enabling swap on ${OSI_DEVICE_PATH}2..."
 sudo swapon ${OSI_DEVICE_PATH}2
 
 # Install base-packages to root
-echo "Installing base packages to root..."
 sudo pacstrap -K /mnt - < /etc/os-installer/bits/base-package.list
 
 # Generate fstab
-echo "Generating fstab..."
 sudo genfstab -U /mnt | sudo tee /mnt/etc/fstab
 
 # Copy pacman.conf to root
-echo "Copying pacman configuration file to root..."
-sudo cp /etc/pacman.conf /mnt/etc/pacman.conf
+sudo cp -v /etc/pacman.conf /mnt/etc/pacman.conf
 
 # Install remaining packages to root
-echo "Installing packages to root..."
 sudo arch-chroot /mnt pacman -S --noconfirm - < /etc/os-installer/bits/package.list
 
 # Set up systemd-boot
-echo "Installing and configuring systemd-boot..."
 sudo arch-chroot /mnt bootctl install
 
 exit 0
