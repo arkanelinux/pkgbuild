@@ -57,11 +57,11 @@ echo "LANG=en_US.UTF-8" | sudo tee /mnt/etc/locale.conf
 if [[ ${OSI_USE_ENCRYPTION} == 1 ]];
 then
 	LUKS_UUID=$(sudo blkid -o value -s UUID /dev/mapper/arkane_root)
-	echo "options cryptdevice=\"UUID=$LUKS_UUID:arkane_root\" lsm=landlock,lockdown,yama,integrity,apparmor,bpf rw" | sudo tee /mnt/boot/loader/entries/arkane.conf
-	echo "options cryptdevice=\"UUID=$LUKS_UUID:arkane_root\" lsm=landlock,lockdown,yama,integrity,apparmor,bpf rw" | sudo tee /mnt/boot/loader/entries/arkane-fallback.conf
+	echo "options cryptdevice=\"UUID=$LUKS_UUID:arkane_root\" lsm=landlock,lockdown,yama,integrity,apparmor,bpf rw" | sudo tee -a /mnt/boot/loader/entries/arkane.conf
+	echo "options cryptdevice=\"UUID=$LUKS_UUID:arkane_root\" lsm=landlock,lockdown,yama,integrity,apparmor,bpf rw" | sudo tee -a /mnt/boot/loader/entries/arkane-fallback.conf
 else
-	echo "options root=\"LABEL=arkane_root\" lsm=landlock,lockdown,yama,integrity,apparmor,bpf rw" | sudo tee /mnt/boot/loader/entries/arkane.conf
-	echo "options root=\"LABEL=arkane_root\" lsm=landlock,lockdown,yama,integrity,apparmor,bpf rw" | sudo tee /mnt/boot/loader/entries/arkane-fallback.conf
+	echo "options root=\"LABEL=arkane_root\" lsm=landlock,lockdown,yama,integrity,apparmor,bpf rw" | sudo tee -a /mnt/boot/loader/entries/arkane.conf
+	echo "options root=\"LABEL=arkane_root\" lsm=landlock,lockdown,yama,integrity,apparmor,bpf rw" | sudo tee -a /mnt/boot/loader/entries/arkane-fallback.conf
 fi
 
 # Ensure synced and umount
