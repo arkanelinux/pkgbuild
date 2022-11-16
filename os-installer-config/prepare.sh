@@ -1,7 +1,6 @@
 #!/usr/bin/bash
 
-# Force synchornize with repos
-echo "Synchronizing with repositories..."
-sudo pacman -Syy
+# Synchornize with repos
+sudo pacman -Syy --noconfirm
 
 exit 0

@@ -38,17 +38,33 @@ done < /etc/os-installer/bits/systemd.services
 sudo cp -v /etc/locale.gen /mnt/etc/locale.gen
 sudo arch-chroot /mnt locale-gen
 
-# Apply configuration tweaks
+# Copy custom GDM configuration file to enable initial setup
 sudo cp -v /etc/os-installer/bits/gdm/custom.conf /mnt/etc/gdm/custom.conf
 sudo arch-chroot /mnt chown gdm:gdm /etc/gdm/custom.conf
+
+# Copy Systemd-boot configuration
 sudo cp -v /etc/os-installer/bits/systemd-boot/arkane.conf /mnt/boot/loader/entries/
 sudo cp -v /etc/os-installer/bits/systemd-boot/arkane-fallback.conf /mnt/boot/loader/entries/
 sudo cp -v /etc/os-installer/bits/systemd-boot/loader.conf /mnt/boot/loader/
+
+# Enable wheel in sudoers
 sudo sed -i 's/#\ %wheel\ ALL=(ALL:ALL)\ ALL/%wheel\ ALL=(ALL:ALL)\ ALL/g' /mnt/etc/sudoers
+
+# Set default locale as en_US.UTF-8
 echo "LANG=en_US.UTF-8" | sudo tee /mnt/etc/locale.conf
+
+# Set kernel parameters in Systemd-boot based on if disk encryption is used or not
+if [[ ${OSI_USE_ENCRYPTION} == 1 ]];
+then
+	LUKS_UUID=$(sudo blkid -o value -s UUID /dev/mapper/arkane_root)
+	echo "options cryptdevice=\"UUID=$LUKS_UUID:arkane_root\" lsm=landlock,lockdown,yama,integrity,apparmor,bpf rw" | sudo tee /mnt/boot/loader/entries/arkane.conf
+	echo "options cryptdevice=\"UUID=$LUKS_UUID:arkane_root\" lsm=landlock,lockdown,yama,integrity,apparmor,bpf rw" | sudo tee /mnt/boot/loader/entries/arkane-fallback.conf
+else
+	echo "options root=\"LABEL=arkane_root\" lsm=landlock,lockdown,yama,integrity,apparmor,bpf rw" | sudo tee /mnt/boot/loader/entries/arkane.conf
+	echo "options root=\"LABEL=arkane_root\" lsm=landlock,lockdown,yama,integrity,apparmor,bpf rw" | sudo tee /mnt/boot/loader/entries/arkane-fallback.conf
+fi
 
 # Ensure synced and umount
 sync
-sudo umount -R /mnt
 
 exit 0

@@ -27,7 +27,7 @@ welcome_page:
 
 minimum_disk_size: 5
 
-offer_disk_encryption: no
+offer_disk_encryption: yes
 
 skip_user: yes
 skip_locale: yes

@@ -23,17 +23,32 @@ then
 fi
 
 # Partition the disk
-sudo sfdisk $OSI_DEVICE_PATH < /etc/os-installer/bits/part.sfdisk
+sudo sfdisk ${OSI_DEVICE_PATH} < /etc/os-installer/bits/part.sfdisk
 
-# Create filesystems on the created disk
-sudo mkfs.fat -F32 ${OSI_DEVICE_PATH}1
-sudo mkswap ${OSI_DEVICE_PATH}2
-sudo mkfs.btrfs -L arkane_root ${OSI_DEVICE_PATH}3
+if [[ ${OSI_USE_ENCRYPTION} == 1 ]];
+then
+	# Create filesystems on the target disk
+	sudo mkfs.fat -F32 ${OSI_DEVICE_PATH}1
+	sudo mkswap ${OSI_DEVICE_PATH}2
+	echo "${OSI_ENCRYPTION_PIN}" | sudo cryptsetup -q LuksFormat ${OSI_DEVICE_PATH}3
+	sudo cryptsetup open ${OSI_DEVICE_PATH}3 arkane_root
+	sudo mkfs.btrfs -L arkane_root /dev/mapper/arkane_root
 
-# Mount partitions to /mnt and activate swap
-sudo mount -o compress=zstd ${OSI_DEVICE_PATH}3 /mnt
-sudo mount --mkdir ${OSI_DEVICE_PATH}1 /mnt/boot
-sudo swapon ${OSI_DEVICE_PATH}2
+	# Mount partitions to /mnt and activate swap
+	sudo mount -o compress=zstd /dev/mapper/arkane_root /mnt
+	sudo mount --mkdir ${OSI_DEVICE_PATH}1 /mnt/boot
+	sudo swapon ${OSI_DEVICE_PATH}2
+else
+	# Create filesystems on the target disk
+	sudo mkfs.fat -F32 ${OSI_DEVICE_PATH}1
+	sudo mkswap ${OSI_DEVICE_PATH}2
+	sudo mkfs.btrfs -L arkane_root ${OSI_DEVICE_PATH}3
+
+	# Mount partitions to /mnt and activate swap
+	sudo mount -o compress=zstd ${OSI_DEVICE_PATH}3 /mnt
+	sudo mount --mkdir ${OSI_DEVICE_PATH}1 /mnt/boot
+	sudo swapon ${OSI_DEVICE_PATH}2
+fi
 
 # Install base-packages to root
 sudo pacstrap -K /mnt - < /etc/os-installer/bits/base-package.list
