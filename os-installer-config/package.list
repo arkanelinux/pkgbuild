@@ -22,6 +22,7 @@ gnome-music
 gnome-screenshot
 gnome-shell
 gnome-software
+gnome-software-packagekit-plugin
 gnome-system-monitor
 gnome-text-editor
 nautilus
