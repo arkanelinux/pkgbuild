@@ -56,9 +56,9 @@ echo "LANG=en_US.UTF-8" | sudo tee /mnt/etc/locale.conf
 # Set kernel parameters in Systemd-boot based on if disk encryption is used or not
 if [[ ${OSI_USE_ENCRYPTION} == 1 ]];
 then
-	LUKS_UUID=$(sudo blkid -o value -s UUID /dev/mapper/arkane_root)
-	echo "options cryptdevice=\"UUID=$LUKS_UUID:arkane_root\" lsm=landlock,lockdown,yama,integrity,apparmor,bpf rw" | sudo tee -a /mnt/boot/loader/entries/arkane.conf
-	echo "options cryptdevice=\"UUID=$LUKS_UUID:arkane_root\" lsm=landlock,lockdown,yama,integrity,apparmor,bpf rw" | sudo tee -a /mnt/boot/loader/entries/arkane-fallback.conf
+	LUKS_UUID=$(sudo blkid -o value -s UUID ${OSI_DEVICE_PATH}3)
+	echo "options cryptdevice=\"UUID=$LUKS_UUID:arkane_root\" root=/dev/mapper/arkane_root lsm=landlock,lockdown,yama,integrity,apparmor,bpf rw" | sudo tee -a /mnt/boot/loader/entries/arkane.conf
+	echo "options cryptdevice=\"UUID=$LUKS_UUID:arkane_root\" root=/dev/mapper/arkane_root lsm=landlock,lockdown,yama,integrity,apparmor,bpf rw" | sudo tee -a /mnt/boot/loader/entries/arkane-fallback.conf
 	sudo sed -i '/^#/!s/HOOKS=(.*)/HOOKS=(base udev autodetect keyboard keymap consolefont modconf block encrypt lvm2 filesystems fsck)/g' /mnt/etc/mkinitcpio.conf
 	sudo arch-chroot /mnt mkinitcpio -P
 else
