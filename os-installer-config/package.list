@@ -1,4 +1,8 @@
+alsa-firmware
+alsa-ucm-conf
 apparmor
+cups
+cups-pdf
 endeavour
 eog
 evince
@@ -25,6 +29,8 @@ gnome-software
 gnome-software-packagekit-plugin
 gnome-system-monitor
 gnome-text-editor
+libva-mesa-driver
+mesa-vdpau
 nautilus
 neovim
 networkmanager
@@ -34,6 +40,10 @@ pipewire
 pipewire-alsa
 pipewire-jack
 pipewire-pulse
+sof-firmware
 totem
+vulkan-intel
+vulkan-radeon
 wireplumber
 xdg-desktop-portal-gnome
+xf86-video-amdgpu
