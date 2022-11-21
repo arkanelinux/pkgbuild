@@ -1,4 +1,5 @@
-apparmor
-NetworkManager
+apparmor.service
+cups.service
+NetworkManager.service
 fstrim.timer
-gdm
+gdm.service
