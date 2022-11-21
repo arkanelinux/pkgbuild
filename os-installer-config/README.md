@@ -4,3 +4,4 @@ This config for os-installer has a hand full of quirks you should be aware of if
 2. `pacman-init.service` should finish running before you run the installation scripts, you can configure this service as a `Before` requirement to `display-manager.service` in its .service file
 3. No user account is created on the newly installed system, gnome-initial-setup is utilized for account creation
 4. The config as-is relies on the arkane package repos, remove or replace any Arkane packages in `base-package.list` and `package.list` to turn it in to a generic Arch Linux installer
+5. This config is intended to be used on a UEFI system, it will not (yet) create bootable systems under BIOS
