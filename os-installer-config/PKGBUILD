@@ -12,7 +12,7 @@ source=('arkane-fallback.conf' 'arkane.conf' 'base-package.list' 'config.yaml'
 	'part.sfdisk' 'prepare.sh' 'systemd.services')
 sha256sums=('SKIP'
             'SKIP'
-						'SKIP'
+            'SKIP'
             'SKIP'
             'SKIP'
             'SKIP'
