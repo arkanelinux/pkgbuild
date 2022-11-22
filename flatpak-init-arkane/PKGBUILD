@@ -1,0 +1,29 @@
+pkgname=flatpak-init-arkane
+pkgver=0.1
+pkgrel=1
+pkgdesc='Scripts used to install Flatpak applications on first boot'
+url='https://github.com/arkanelinux/pkgbuild/tree/main/flatpak-init-arkane'
+arch=('x86_64')
+license=('Public domain')
+makedepends=()
+depends=('systemd' 'python3' 'flatpak')
+source=('flatpak-init.py' 'flatpak.list' 'flatpak-init.service')
+
+sha256sums=('SKIP'
+	          'SKIP'
+						'SKIP')
+
+package() {
+	cd "$pkgdir"
+
+	install -d etc/arkane/flatpak-init
+	install -d usr/bin
+	install -d usr/lib/systemd/system
+	install -d var/lib/arkane
+
+	# /etc/os-installer/bits/flatpak
+	install -m644 "$srcdir"/flatpak-init.service usr/lib/systemd/system/
+	install -m644 "$srcdir"/flatpak.list etc/arkane/flatpak-init/
+	install -m744 "$srcdir"/flatpak-init.py usr/bin/
+}
+
