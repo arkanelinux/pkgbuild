@@ -1,6 +1,6 @@
 pkgname=os-installer-config
 pkgver=0.1
-pkgrel=4
+pkgrel=5
 pkgdesc='Default Arkane Linux configuration files for the os-installer'
 url='https://github.com/arkanelinux/pkgbuild/tree/main/os-installer-config'
 arch=('x86_64')
@@ -8,10 +8,11 @@ license=('Public domain')
 makedepends=()
 depends=('os-installer')
 source=('arkane-fallback.conf' 'arkane.conf' 'base-package.list' 'config.yaml'
-	'configure.sh' 'custom.conf' 'install.sh' 'loader.conf' 'package.list'
+	'configure.sh' 'custom.conf' 'flatpak.list' 'install.sh' 'loader.conf' 'package.list'
 	'part.sfdisk' 'prepare.sh' 'systemd.services')
 sha256sums=('SKIP'
             'SKIP'
+						'SKIP'
             'SKIP'
             'SKIP'
             'SKIP'
@@ -44,7 +45,7 @@ package() {
   	done
 
 	# /etc/os-installer/bits/
-	for f in base-package.list package.list part.sfdisk systemd.services; do
+	for f in base-package.list package.list part.sfdisk systemd.services flatpak.list; do
     		install -m644 "$srcdir"/$f etc/os-installer/bits/
   	done
   	

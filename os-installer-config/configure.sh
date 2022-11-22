@@ -34,6 +34,11 @@ while read i; do
 	sudo arch-chroot /mnt systemctl enable $i
 done < /etc/os-installer/bits/systemd.services
 
+# Install system-wide Flatpak applications
+while read i; do
+	sudo arch-chroot /mnt flatpak --system install --assumeyes $i
+done < /etc/os-installer/bits/flatpak.list
+
 # Generate locales
 sudo cp -v /etc/locale.gen /mnt/etc/locale.gen
 sudo arch-chroot /mnt locale-gen
