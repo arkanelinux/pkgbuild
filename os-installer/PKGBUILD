@@ -10,8 +10,8 @@ license=('GPL-3.0-or-later')
 makedepends=('gnome-desktop' 'gtk4' 'libadwaita' 'libgweather-4' 'python-yaml' 'udisks2' 'vte4' 'meson')
 depends=('gnome-desktop' 'gtk4' 'libadwaita' 'libgweather-4' 'python-yaml' 'udisks2' 'vte4')
 optdepends=('epiphany: online assistance'
-						'gnome-disk-utility: manual disk partitioning' 
-						'gnome-control-center: Wi-Fi setup')
+            'gnome-disk-utility: manual disk partitioning' 
+            'gnome-control-center: Wi-Fi setup')
 sha256sums=(SKIP)
 
 build () {
