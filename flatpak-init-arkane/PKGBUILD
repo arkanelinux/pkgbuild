@@ -1,5 +1,5 @@
 pkgname=flatpak-init-arkane
-pkgver=0.1
+pkgver=2022.11.23
 pkgrel=1
 pkgdesc='Scripts used to install Flatpak applications on first boot'
 url='https://github.com/arkanelinux/pkgbuild/tree/main/flatpak-init-arkane'

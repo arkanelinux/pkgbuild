@@ -1,5 +1,5 @@
 pkgname=firefox-tweaks-arkane
-pkgver=1.0
+pkgver=2022.11.23
 pkgrel=1
 pkgdesc='Currently relevant tweaks for Firefox such as Wayland enablement'
 url='https://github.com/arkanelinux/pkgbuild/tree/main/arkane-tweaks-firefox'
