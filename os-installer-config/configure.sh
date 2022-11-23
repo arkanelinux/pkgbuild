@@ -49,7 +49,8 @@ sudo cp -v /etc/os-installer/bits/systemd-boot/loader.conf /mnt/boot/loader/
 
 # Add dconf tweaks
 sudo mkdir -p /mnt/etc/dconf/db/local.d/
-sudo cp -v /etc/os-installer/bits/dconf/* /mnt/etc/dconf/db/local.d/
+sudo cp -v /etc/os-installer/bits/dconf/00-favorite-apps /mnt/etc/dconf/db/local.d/
+sudo cp -v /etc/os-installer/bits/dconf/user /mnt/etc/dconf/db/profile/
 
 # Enable wheel in sudoers
 sudo sed -i 's/#\ %wheel\ ALL=(ALL:ALL)\ ALL/%wheel\ ALL=(ALL:ALL)\ ALL/g' /mnt/etc/sudoers

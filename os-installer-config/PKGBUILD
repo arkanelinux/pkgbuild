@@ -9,8 +9,10 @@ makedepends=()
 depends=('os-installer')
 source=('arkane-fallback.conf' 'arkane.conf' 'base-package.list' 'config.yaml'
         'configure.sh' 'custom.conf' 'install.sh' 'loader.conf' 'package.list'
-        'part.sfdisk' 'prepare.sh' 'systemd.services' '00-favorite-apps')
+        'part.sfdisk' 'prepare.sh' 'systemd.services' '00-favorite-apps'
+        'user')
 sha256sums=('SKIP'
+            'SKIP'
             'SKIP'
             'SKIP'
             'SKIP'
@@ -41,21 +43,23 @@ package() {
 	install -m644 "$srcdir"/custom.conf etc/os-installer/bits/gdm/ 
 
 	# /etc/os-installer/scripts/bits/gdm
-	install -m644 "$srcdir"/00-favorite-apps etc/os-installer/bits/dconf/
+	for f in 00-favorite-apps user; do
+		install -m644 "$srcdir"/$f etc/os-installer/bits/dconf
+	done
 
   	# /etc/os-installer/scripts/
 	for f in configure.sh install.sh prepare.sh; do
-    		install -m744 "$srcdir"/$f etc/os-installer/scripts/
-  	done
+		install -m744 "$srcdir"/$f etc/os-installer/scripts/
+	done
 
 	# /etc/os-installer/bits/
 	for f in base-package.list package.list part.sfdisk systemd.services; do
-    		install -m644 "$srcdir"/$f etc/os-installer/bits/
-  	done
+		install -m644 "$srcdir"/$f etc/os-installer/bits/
+	done
   	
   	# /etc/os-installer/bits/systemd-boot/
 	for f in arkane.conf arkane-fallback.conf loader.conf; do
-    		install -m644 "$srcdir"/$f etc/os-installer/bits/systemd-boot/
-  	done
+		install -m644 "$srcdir"/$f etc/os-installer/bits/systemd-boot/
+	done
 }
 
