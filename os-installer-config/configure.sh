@@ -48,7 +48,7 @@ sudo cp -v /etc/os-installer/bits/systemd-boot/arkane-fallback.conf /mnt/boot/lo
 sudo cp -v /etc/os-installer/bits/systemd-boot/loader.conf /mnt/boot/loader/
 
 # Add dconf tweaks
-mkdir -p /mnt/etc/dconf/db/local.d/
+sudo mkdir -p /mnt/etc/dconf/db/local.d/
 sudo cp -v /etc/os-installer/bits/dconf/* /mnt/etc/dconf/db/local.d/
 
 # Enable wheel in sudoers
