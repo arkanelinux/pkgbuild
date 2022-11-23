@@ -5,7 +5,9 @@ After=network-online.target
 ConditionPathExists=!/var/lib/arkane/flatpak-init.lock
 
 [Service]
-Type=oneshot
+Type=simple
+Restart=on-failure
+RestartSec=15
 RemainAfterExit=yes
 ExecStart=/usr/bin/flatpak-init.py
 
