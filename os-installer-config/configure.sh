@@ -72,6 +72,6 @@ fi
 
 # Ensure synced and umount
 sync
-umount -R /mnt
+sudo umount -R /mnt
 
 exit 0
