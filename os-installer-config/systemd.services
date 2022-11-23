@@ -1,5 +1,6 @@
+NetworkManager.service
 apparmor.service
 cups.service
-NetworkManager.service
+flatpak-init.service
 fstrim.timer
 gdm.service

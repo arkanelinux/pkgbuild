@@ -5,6 +5,7 @@ cups
 cups-pdf
 filesystem-arkane
 flatpak
+flatpak-init-arkane
 gdm
 gnome-backgrounds
 gnome-console
