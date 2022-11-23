@@ -4,6 +4,7 @@ apparmor
 cups
 cups-pdf
 filesystem-arkane
+firefox-tweaks-arkane
 flatpak
 flatpak-init-arkane
 gdm
