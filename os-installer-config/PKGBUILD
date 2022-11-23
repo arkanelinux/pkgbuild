@@ -20,6 +20,7 @@ sha256sums=('SKIP'
             'SKIP'
             'SKIP'
             'SKIP'
+            'SKIP'
             'SKIP')
 
 package() {
@@ -43,7 +44,7 @@ package() {
   	done
 
 	# /etc/os-installer/bits/
-	for f in base-package.list package.list part.sfdisk systemd.services flatpak.list; do
+	for f in base-package.list package.list part.sfdisk systemd.services; do
     		install -m644 "$srcdir"/$f etc/os-installer/bits/
   	done
   	
