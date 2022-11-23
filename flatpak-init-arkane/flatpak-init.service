@@ -1,6 +1,5 @@
 [Unit]
 Description=Installing Flatpak applications
-Before=display-manager.service
 Wants=network-online.target
 After=network-online.target
 ConditionPathExists=!/var/lib/arkane/flatpak-init.lock
