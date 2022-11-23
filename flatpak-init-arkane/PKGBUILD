@@ -10,8 +10,8 @@ depends=('systemd' 'python3' 'flatpak')
 source=('flatpak-init.py' 'flatpak.list' 'flatpak-init.service')
 
 sha256sums=('SKIP'
-	          'SKIP'
-						'SKIP')
+            'SKIP'
+            'SKIP')
 
 package() {
 	cd "$pkgdir"
