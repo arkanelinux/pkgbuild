@@ -9,8 +9,9 @@ makedepends=()
 depends=('os-installer')
 source=('arkane-fallback.conf' 'arkane.conf' 'base-package.list' 'config.yaml'
         'configure.sh' 'custom.conf' 'install.sh' 'loader.conf' 'package.list'
-        'part.sfdisk' 'prepare.sh' 'systemd.services')
+        'part.sfdisk' 'prepare.sh' 'systemd.services' '00-favorite-apps')
 sha256sums=('SKIP'
+            'SKIP'
             'SKIP'
             'SKIP'
             'SKIP'
@@ -29,6 +30,7 @@ package() {
 	install -d etc/os-installer/scripts
 	install -d etc/os-installer/icons
 	
+	install -d etc/os-installer/bits/dconf
 	install -d etc/os-installer/bits/gdm
 	install -d etc/os-installer/bits/systemd-boot
 	
@@ -37,6 +39,9 @@ package() {
 
 	# /etc/os-installer/scripts/bits/gdm
 	install -m644 "$srcdir"/custom.conf etc/os-installer/bits/gdm/ 
+
+	# /etc/os-installer/scripts/bits/gdm
+	install -m644 "$srcdir"/00-favorite-apps etc/os-installer/bits/dconf/
 
   	# /etc/os-installer/scripts/
 	for f in configure.sh install.sh prepare.sh; do
