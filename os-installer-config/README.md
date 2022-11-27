@@ -14,4 +14,4 @@ The os-installer-config's layout may seem like a mess when looking upon this rep
 
 The PKGBUILD will place everything in its intended location, refer to this file for a quick overview of what goes where.
 
-`prepare.sh`, `install.sh` and `configure.sh` are the primary scripts run by os-installer, all other files either serve as configuration files for for various programs run by os-installer-config or are copied to the newly installed OS by one of these three scripts.
+`prepare.sh`, `install.sh` and `configure.sh` are the primary scripts run by os-installer and `config.yaml` is os-installer's configuration file, all other files either serve as configuration files for for various programs run by os-installer-config or are copied to the newly installed OS by one of these three scripts.
