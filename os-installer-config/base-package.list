@@ -4,3 +4,4 @@ base-devel
 filesystem-arkane
 intel-ucode
 linux
+linux-firmware
