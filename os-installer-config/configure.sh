@@ -53,6 +53,11 @@ sudo cp -v /etc/os-installer/bits/dconf/00-favorite-apps /mnt/etc/dconf/db/local
 sudo cp -v /etc/os-installer/bits/dconf/user /mnt/etc/dconf/profile/
 sudo arch-chroot /mnt dconf update
 
+# Remove unwanted .desktop files
+for f in avahi-discover bssh bvnc qv4l2 qvidcap; do
+	sudo rm /mnt/usr/share/applications/$f.desktop
+done
+
 # Enable wheel in sudoers
 sudo sed -i 's/#\ %wheel\ ALL=(ALL:ALL)\ ALL/%wheel\ ALL=(ALL:ALL)\ ALL/g' /mnt/etc/sudoers
 
