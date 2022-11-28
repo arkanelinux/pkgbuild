@@ -58,6 +58,13 @@ for f in avahi-discover bssh bvnc qv4l2 qvidcap; do
 	sudo rm /mnt/usr/share/applications/$f.desktop
 done
 
+# Add various symlinks to binaries
+## Symlink vi and vim to neovim
+sudo ln -s /usr/bin/nvim /mnt/usr/local/bin/vi
+sudo ln -s /usr/bin/nvim /mnt/usr/local/bin/vim
+## Workaround to allow nvim to start in kgx using its .desktop file
+sudo ln -s /usr/bin/kgx /mnt/usr/local/bin/gnome-terminal
+
 # Enable wheel in sudoers
 sudo sed -i 's/#\ %wheel\ ALL=(ALL:ALL)\ ALL/%wheel\ ALL=(ALL:ALL)\ ALL/g' /mnt/etc/sudoers
 
