@@ -2,6 +2,8 @@ app/org.gnome.Boxes/x86_64/stable
 app/org.gnome.Calculator/x86_64/stable
 app/org.gnome.Calendar/x86_64/stable
 app/org.gnome.Characters/x86_64/stable
+app/org.gnome.Weather/x86_64/stable
+app/org.gnome.SoundRecorder/x86_64/stable
 app/org.gnome.Contacts/x86_64/stable
 app/org.gnome.Evince/x86_64/stable
 app/org.gnome.Extensions/x86_64/stable
