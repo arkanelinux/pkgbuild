@@ -30,6 +30,7 @@ pipewire-alsa
 pipewire-jack
 pipewire-pulse
 plymouth
+simple-scan
 sof-firmware
 vulkan-intel
 vulkan-radeon
