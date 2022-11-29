@@ -65,6 +65,9 @@ sudo ln -s /usr/bin/nvim /mnt/usr/local/bin/vim
 ## Workaround to allow nvim to start in kgx using its .desktop file
 sudo ln -s /usr/bin/kgx /mnt/usr/local/bin/gnome-terminal
 
+# Configure useradd default on new root
+sudo cp /etc/default/useradd /mnt/etc/default/
+
 # Enable wheel in sudoers
 sudo sed -i 's/#\ %wheel\ ALL=(ALL:ALL)\ ALL/%wheel\ ALL=(ALL:ALL)\ ALL/g' /mnt/etc/sudoers
 
