@@ -1,5 +1,6 @@
 NetworkManager.service
 apparmor.service
+bluetooth.service
 cups.service
 flatpak-init.service
 fstrim.timer

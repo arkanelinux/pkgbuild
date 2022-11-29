@@ -1,6 +1,7 @@
 alsa-firmware
 alsa-ucm-conf
 apparmor
+bluez
 cups
 cups-pdf
 filesystem-arkane
