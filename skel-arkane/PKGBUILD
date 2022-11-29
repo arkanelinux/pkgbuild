@@ -7,7 +7,7 @@ arch=('any')
 license=('Public domain')
 source=('init.vim' '.zshrc')
 sha256sums=('6f9f17c50e8566fb18960beb05d155b4439b9b42269dd9720f001e91aa50bc8f'
-            '9285a87d56cd3802ccc4e1dfe2104bc4f0c9831fb67db9b4be69d82485433bdc')
+            'cece535f83d40d1d032d8e71f0ca3ef1a7494e8929b5ddbcc83743d72238c350')
 
 package() {
 	cd "$pkgdir"
