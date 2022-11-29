@@ -30,15 +30,31 @@ then
 fi
 
 # Enable systemd services
+#
+# A list of systemd services is loaded from systemd.services and
+# enabled on by one
+#
+# I considered using presets for this, however to keep the OS as
+# flexible as possible I opted for this method instead, on top of
+# that nobody on arch uses systemd presets other than systemd itself
 while read i; do
 	sudo arch-chroot /mnt systemctl enable $i
 done < /etc/os-installer/bits/systemd.services
 
 # Generate locales
+#
+# We are copying our installer's locale config file for it has all
+# the locals we might need already enabled. We have to enable all 
+# these locales for gnome-initial-setup requires them, it bases 
+# its list of available languages on the generated locals
 sudo cp -v /etc/locale.gen /mnt/etc/locale.gen
 sudo arch-chroot /mnt locale-gen
 
 # Copy custom GDM configuration file to enable initial setup
+#
+# gnome-initial-setup is started via gdm, when configured gdm will
+# start a minimal gnome-shell and gnome-initial-setup if no users
+# are present on the system
 sudo cp -v /etc/os-installer/bits/gdm/custom.conf /mnt/etc/gdm/custom.conf
 sudo arch-chroot /mnt chown gdm:gdm /etc/gdm/custom.conf
 
@@ -54,6 +70,9 @@ sudo cp -v /etc/os-installer/bits/dconf/user /mnt/etc/dconf/profile/
 sudo arch-chroot /mnt dconf update
 
 # Remove unwanted .desktop files
+#
+# Arch packages tend to be... fully featured... and thus sometimes 
+# ship unwanted bloat
 for f in avahi-discover bssh bvnc qv4l2 qvidcap; do
 	sudo rm /mnt/usr/share/applications/$f.desktop
 done
@@ -66,17 +85,27 @@ sudo ln -s /usr/bin/nvim /mnt/usr/local/bin/vim
 sudo ln -s /usr/bin/kgx /mnt/usr/local/bin/gnome-terminal
 
 # Configure useradd default on new root
-sudo cp /etc/default/useradd /mnt/etc/default/
+#
+# The custom useradd default is used for setting Zsh as the default
+# shell for newly created users
+sudo cp -v /etc/default/useradd /mnt/etc/default/
 
 # Enable wheel in sudoers
 sudo sed -i 's/#\ %wheel\ ALL=(ALL:ALL)\ ALL/%wheel\ ALL=(ALL:ALL)\ ALL/g' /mnt/etc/sudoers
 
 # Set default locale as en_US.UTF-8
+#
+# gnome-initial-setup will default to this language, it will on
+# first boot be changed by gnome-initial-setup
 echo "LANG=en_US.UTF-8" | sudo tee /mnt/etc/locale.conf
 
 # Set kernel parameters in Systemd-boot based on if disk encryption is used or not
+#
+# This is the base string shared by all configurations
 export KERNEL_PARAM="lsm=landlock,lockdown,yama,integrity,apparmor,bpf quiet splash loglevel=3 vt.global_cursor_default=0 systemd.show_status=auto rd.udev.log_level=3 rw"
 
+# The kernel parameters have to be configured differently based upon if the
+# user opted for disk encryption or not
 if [[ ${OSI_USE_ENCRYPTION} == 1 ]];
 then
 	LUKS_UUID=$(sudo blkid -o value -s UUID ${OSI_DEVICE_PATH}3)
@@ -92,6 +121,9 @@ else
 fi
 
 # Ensure synced and umount
+#
+# Linux sometimes likes to be smart about these things are write everything
+# to the memory instead of the disk
 sync
 sudo umount -R /mnt
 

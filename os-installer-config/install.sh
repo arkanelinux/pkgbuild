@@ -23,8 +23,11 @@ then
 fi
 
 # Partition the disk
+#
+# We will load the partitioning scheme from part.sfdisk
 sudo sfdisk ${OSI_DEVICE_PATH} < /etc/os-installer/bits/part.sfdisk
 
+# Check if encryption is requested and partition accordingly
 if [[ ${OSI_USE_ENCRYPTION} == 1 ]];
 then
 	# Create filesystems on the target disk
@@ -51,18 +54,27 @@ else
 fi
 
 # Install base-packages to root
+#
+# We start with just a basic list of core packages for some packages
+# might fail installation when /dev, /proc etc.. are not mounted
 sudo pacstrap -K /mnt - < /etc/os-installer/bits/base-package.list
 
 # Generate fstab
 sudo genfstab -U /mnt | sudo tee /mnt/etc/fstab
 
 # Copy pacman.conf to root
+#
+# Our arkaneiso pacman.conf contains all the changes the new install
+# will need also such as the Arkane repo definitions and ILoveCandy :)
 sudo cp -v /etc/pacman.conf /mnt/etc/pacman.conf
 
 # Install remaining packages to root
+#
+# Now that the core OS is installed we can install the remaining packages
+# via arch-chroot + pacman on the new install
 sudo arch-chroot /mnt pacman -S --noconfirm - < /etc/os-installer/bits/package.list
 
-# Set up systemd-boot
+# Install systemd-boot
 sudo arch-chroot /mnt bootctl install
 
 exit 0
