@@ -1,0 +1,20 @@
+pkgname=skel-arkane
+pkgver=2022.11.29
+pkgrel=1
+pkgdesc='Skel configuration for Arkane Linux'
+url='https://github.com/arkanelinux/pkgbuild/tree/main/skel-arkane'
+arch=('any')
+license=('Public domain')
+source=('init.vim' '.zshrc')
+sha256sums=('6f9f17c50e8566fb18960beb05d155b4439b9b42269dd9720f001e91aa50bc8f'
+            '627dfe77445bc1e3e3fbca491f09a6db834d338c12c105084b53cbe5cf929daf')
+
+package() {
+	cd "$pkgdir"
+
+	install -d etc/skel/.config/nvim
+
+	install -m644 "$srcdir"/init.vim etc/skel/.config/nvim/
+	install -m644 "$srcdir"/.zshrc etc/skel/
+}
+
