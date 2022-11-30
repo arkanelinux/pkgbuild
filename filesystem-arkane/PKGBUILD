@@ -1,6 +1,3 @@
-# Maintainer: Sébastien Luttringer
-# Contributor: Tom Gundersen <teg@jklm.no>
-
 pkgname=filesystem-arkane
 pkgver=2022.10.18
 pkgrel=3
