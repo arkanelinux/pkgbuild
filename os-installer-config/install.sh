@@ -68,6 +68,12 @@ sudo genfstab -U /mnt | sudo tee /mnt/etc/fstab
 # will need also such as the Arkane repo definitions and ILoveCandy :)
 sudo cp -v /etc/pacman.conf /mnt/etc/pacman.conf
 
+# Populate Ach keyring
+#
+# For some reason Arch does not populate the keyring upon installing
+# arkane-keyring, thus we have to call it manually
+sudo arch-chroot /mnt pacman-key --populate arkane
+
 # Install remaining packages to root
 #
 # Now that the core OS is installed we can install the remaining packages
