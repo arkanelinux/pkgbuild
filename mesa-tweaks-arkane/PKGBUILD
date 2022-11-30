@@ -7,10 +7,8 @@ arch=('any')
 license=('Public domain')
 optdepends=('mesa'
             'vulkan-radeon'
-            'vulkan-intel'
             'lib32-mesa'
-            'lib32-vulkan-radeon'
-						'likb32-vulkan-intel')
+						'lib32-vulkan-radeon')
 source=('mesa.sh')
 sha256sums=('0d7185df16797acbb13cc45f3f1607f5ebd5c401fc8da9243c03e0ec0449efab')
 
