@@ -1,0 +1,21 @@
+pkgname=arkane-keyring
+pkgver=2022.11.30
+pkgrel=1
+pkgdesc='Arkane Linux PGP keyring'
+url='https://github.com/arkanelinux/arkane-keyring'
+arch=('any')
+license=('GPL')
+install="${pkgname}.install"
+source=('https://github.com/arkanelinux/arkane-keyring/tarball/master')
+validpgpkeys=('9367D79152631966FF094C242BA91DC2563B83D1')
+sha256sums=('43bf269548a8b170a651cf10d98d68c85b2d3b83eb653d7676283d3ac60b96e4')
+
+package() {
+	cd "$pkgdir"
+ 
+	install -d usr/share/pacman/keyrings
+
+	for f in arkane.gpg arkane-trusted arkane-revoked; do
+		install -m644 "$srcdir"/arkanelinux-arkane-keyring-*/$f usr/share/pacman/keyrings/
+	done
+}
