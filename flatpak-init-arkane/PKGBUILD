@@ -7,7 +7,7 @@ arch=('x86_64')
 license=('Unlicense')
 depends=('systemd' 'python3' 'flatpak')
 source=("https://github.com/arkanelinux/${pkgname}/tarball/master")
-sha256sums=('SKIP')
+sha256sums=('04255b76b1587647cec118b9b081b3e4896b118d6cd71180baaa12fad9f1660c')
 
 package() {
 	cd "$pkgdir"
