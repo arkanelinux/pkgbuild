@@ -36,10 +36,13 @@ plymouth
 simple-scan
 skel-arkane
 sof-firmware
+spice-vdagent
 vulkan-intel
 vulkan-radeon
 wireplumber
 xdg-desktop-portal-gnome
+xdg-user-dirs
+xdg-user-dirs-gtk
 xf86-video-amdgpu
 zsh
 zsh-autosuggestions
