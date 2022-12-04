@@ -1,0 +1,27 @@
+pkgname=gnome-kiosk
+pkgver=0.1
+pkgrel=2
+pkgdesc='mutter based compositor for kiosks'
+url='https://gitlab.gnome.org/GNOME/gnome-kiosk'
+source=('gnome-kiosk::git+https://gitlab.gnome.org/GNOME/gnome-kiosk.git#branch=main'
+        'patch')
+sha256sums=('SKIP'
+            'd996b0a8d8b88f78fcafe3eb4b75a49de954d4cf75f66f64a0f66812e8aa01e6')
+arch=('x86_64')
+license=('GPL-2.0-or-later')
+makedepends=('meson' 'patch')
+depends=('gnome-desktop' 'gdm')
+optdepends=()
+
+build () {
+	cd "$srcdir"/"$pkgname"
+
+	meson --prefix=/usr build
+}
+
+package() {
+	cd "$srcdir"/"$pkgname"
+
+	meson install -C build --destdir $pkgdir
+	patch "$pkgdir"/usr/bin/gnome-kiosk-script < ../patch
+}
