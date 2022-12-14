@@ -1,13 +1,13 @@
 pkgname=flatpak-init-arkane
 pkgver=2022.12.14
-pkgrel=1
+pkgrel=2
 pkgdesc='Scripts used to install Flatpak applications on first boot'
 url='https://github.com/arkanelinux/flatpak-init-arkane/'
 arch=('x86_64')
 license=('Unlicense')
 depends=('systemd' 'python3' 'flatpak' 'libnotify' 'bash')
 source=("https://github.com/arkanelinux/${pkgname}/tarball/master")
-sha256sums=('SKIP')
+sha256sums=('1928ec53d82dd0188429ade15ada0dadab8933a2345f13ce530f65ab34574a42')
 
 package() {
 	cd "$pkgdir"
