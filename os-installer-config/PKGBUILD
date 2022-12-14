@@ -1,5 +1,5 @@
 pkgname=os-installer-config
-pkgver=2022.12.04
+pkgver=2022.12.14
 pkgrel=1
 pkgdesc='Default Arkane Linux configuration files for the os-installer'
 url='https://github.com/arkanelinux/pkgbuild/tree/main/os-installer-config'
