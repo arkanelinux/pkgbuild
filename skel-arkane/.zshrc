@@ -1,4 +1,10 @@
 # ---- Zsh configuration ---- #
+
+autoload -Uz compinit
+compinit
+
+zstyle ':completion:*' menu select
+
 # Prompt style
 PS1="%n%f@%F{136}%m%f %1~ %#> "
 
@@ -10,6 +16,9 @@ SAVEHIST=10000
 # ctrl + left/right word forwards
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+
+# shift + tab for reverse tab-completion
+bindkey '^[[Z' reverse-menu-complete
 
 # Custom chars which define beginning or end of words
 WORDCHARS=${WORDCHARS/\/}
