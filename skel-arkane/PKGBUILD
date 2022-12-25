@@ -1,5 +1,5 @@
 pkgname=skel-arkane
-pkgver=2022.11.29
+pkgver=2022.12.25
 pkgrel=1
 pkgdesc='Skel configuration for Arkane Linux'
 url='https://github.com/arkanelinux/pkgbuild/tree/main/skel-arkane'
