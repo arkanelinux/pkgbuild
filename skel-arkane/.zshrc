@@ -3,8 +3,6 @@
 autoload -Uz compinit
 compinit
 
-zstyle ':completion:*' menu select
-
 # Prompt style
 PS1="%n%f@%F{136}%m%f %1~ %#> "
 
@@ -19,6 +17,8 @@ bindkey "^[[1;5D" backward-word
 
 # shift + tab for reverse tab-completion
 bindkey '^[[Z' reverse-menu-complete
+
+zstyle ':completion:*' menu select
 
 # Custom chars which define beginning or end of words
 WORDCHARS=${WORDCHARS/\/}
