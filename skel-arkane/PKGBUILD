@@ -8,7 +8,7 @@ conlicts=('grml-zsh-config')
 license=('Public domain')
 source=('init.vim' '.zshrc')
 sha256sums=('6f9f17c50e8566fb18960beb05d155b4439b9b42269dd9720f001e91aa50bc8f'
-            '5f9aaad7a09ae5bb7ec25f075ede6ebb12dd0b4b488d10f611ff04d6c7dec5b0')
+            '93e76f9a76c5f86977699b951923387da8c4e80120759e6d11e119d738aed8b7')
 
 package() {
 	cd "$pkgdir"
