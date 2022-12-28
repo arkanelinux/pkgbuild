@@ -1,6 +1,6 @@
 pkgname=plymouth
 pkgver=22.02.122
-pkgrel=4
+pkgrel=8
 pkgdesc="A graphical boot splash screen with kernel mode-setting support"
 url="https://www.freedesktop.org/wiki/Software/Plymouth/"
 arch=('i686' 'x86_64')
@@ -48,7 +48,7 @@ build() {
 		--enable-pango \
 		--enable-gtk=no \
 		--with-release-file=/etc/os-release \
-		--with-logo=/usr/share/plymouth/arch-logo.png \
+		--with-logo=/usr/share/plymouth/arkanelinux-logo.png \
 		--with-background-color=0x000000 \
 		--with-background-start-color-stop=0x000000 \
 		--with-background-end-color-stop=0x4D4D4D \
@@ -64,7 +64,8 @@ package() {
 
 	make DESTDIR="$pkgdir" install
 
-	install -Dm644 "$srcdir/arch-logo.png" "$pkgdir/usr/share/plymouth/arch-logo.png"
+	install -Dm644 "$srcdir/arkanelinux-logo.png" "$pkgdir/usr/share/plymouth/arkanelinux-logo.png"
+	ln -s ../../arkanelinux-logo.png "$pkgdir/usr/share/plymouth/themes/spinner/watermark.png"
 
 	install -Dm644 "$srcdir/plymouth.encrypt_hook" "$pkgdir/usr/lib/initcpio/hooks/plymouth-encrypt"
 	install -Dm644 "$srcdir/plymouth.encrypt_install" "$pkgdir/usr/lib/initcpio/install/plymouth-encrypt"
