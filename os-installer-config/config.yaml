@@ -21,7 +21,7 @@ suggested_languages:
     - 'zh'
 
 welcome_page:
-    logo    : '/usr/share/pixmaps/arkane-logo.png'
+    logo    : '/usr/share/pixmaps/arkanelinux-logo.png'
     text    : 'Welcome to Arkane Linux!'
     usage   : yes
 
