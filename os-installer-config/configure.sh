@@ -99,6 +99,9 @@ sudo sed -i 's/#\ %wheel\ ALL=(ALL:ALL)\ ALL/%wheel\ ALL=(ALL:ALL)\ ALL/g' /mnt/
 # first boot be changed by gnome-initial-setup
 echo "LANG=en_US.UTF-8" | sudo tee /mnt/etc/locale.conf
 
+# Set hostname
+echo "arkane" | sudo tee /mnt/etc/hostname
+
 # Set kernel parameters in Systemd-boot based on if disk encryption is used or not
 #
 # This is the base string shared by all configurations
