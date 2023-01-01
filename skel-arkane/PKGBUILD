@@ -1,6 +1,6 @@
 pkgname=skel-arkane
-pkgver=2022.12.25
-pkgrel=2
+pkgver=2023.01.01
+pkgrel=1
 pkgdesc='Skel configuration for Arkane Linux'
 url='https://github.com/arkanelinux/pkgbuild/tree/main/skel-arkane'
 arch=('any')
@@ -8,7 +8,7 @@ conlicts=('grml-zsh-config')
 license=('Public domain')
 source=('init.vim' '.zshrc')
 sha256sums=('6f9f17c50e8566fb18960beb05d155b4439b9b42269dd9720f001e91aa50bc8f'
-            '07225c7394a9103aae2c169fda49393d9e439108a0bfa93aad35bb49c4300885')
+            '75a02d8721f6a8eb2324a34609eb556e0120ad86a2a1bf86a595651231ec8730')
 
 package() {
 	cd "$pkgdir"
