@@ -43,7 +43,7 @@ done < /etc/os-installer/bits/systemd.services
 
 # Set 15 second default timeout in Systemd to avoid long shutdowns
 # when applications refused to shut down
-sudo sed -i 's/#DefaultTimeoutStopSec=90s/DefaultTimeoutStopSec=15s/g' /mnt/etc/systemd/systemd.conf
+sudo sed -i 's/#DefaultTimeoutStopSec=90s/DefaultTimeoutStopSec=15s/g' /mnt/etc/systemd/system.conf
 
 # Generate locales
 #
