@@ -23,6 +23,7 @@ gnome-software
 gnome-software-packagekit-plugin
 gnome-system-monitor
 libva-mesa-driver
+lsb-release-arkane
 mesa-vdpau
 nautilus
 neovim
