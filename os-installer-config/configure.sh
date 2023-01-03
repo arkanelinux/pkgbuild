@@ -111,7 +111,7 @@ echo "arkane" | sudo tee /mnt/etc/hostname
 # lsb-release is installed as a dependency of some popular packages,
 # it being installed with the default config can mess with fetch
 # programs making it report the OS as Arch Linux
-sud cp -v /etc/lsb-release /mnt/etc/
+sudo cp -v /etc/lsb-release /mnt/etc/
 
 # Set kernel parameters in Systemd-boot based on if disk encryption is used or not
 #
