@@ -106,13 +106,6 @@ echo "LANG=en_US.UTF-8" | sudo tee /mnt/etc/locale.conf
 # Set hostname
 echo "arkane" | sudo tee /mnt/etc/hostname
 
-# Configure lsb-release
-#
-# lsb-release is installed as a dependency of some popular packages,
-# it being installed with the default config can mess with fetch
-# programs making it report the OS as Arch Linux
-sudo cp -v /etc/lsb-release /mnt/etc/
-
 # Set kernel parameters in Systemd-boot based on if disk encryption is used or not
 #
 # This is the base string shared by all configurations
