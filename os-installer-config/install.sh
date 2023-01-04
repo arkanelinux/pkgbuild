@@ -38,14 +38,14 @@ then
 		sudo mkswap "${OSI_DEVICE_PATH}p2"
 		echo "${OSI_ENCRYPTION_PIN}" | sudo cryptsetup -q luksFormat "${OSI_DEVICE_PATH}p3"
 		echo "${OSI_ENCRYPTION_PIN}" | sudo cryptsetup open "${OSI_DEVICE_PATH}p3" arkane_root -
-		sudo mkfs.btrfs -L arkane_root /dev/mapper/arkane_root
+		sudo mkfs.btrfs -f -L arkane_root /dev/mapper/arkane_root
 	else
 		# Create filesystems on the target disk
 		sudo mkfs.fat -F32 "${OSI_DEVICE_PATH}1"
 		sudo mkswap "${OSI_DEVICE_PATH}2"
 		echo "${OSI_ENCRYPTION_PIN}" | sudo cryptsetup -q luksFormat "${OSI_DEVICE_PATH}3"
 		echo "${OSI_ENCRYPTION_PIN}" | sudo cryptsetup open "${OSI_DEVICE_PATH}3" arkane_root -
-		sudo mkfs.btrfs -L arkane_root /dev/mapper/arkane_root
+		sudo mkfs.btrfs -f -L arkane_root /dev/mapper/arkane_root
 
 		# Mount partitions to /mnt and activate swap
 		sudo mount -o compress=zstd /dev/mapper/arkane_root /mnt
