@@ -8,6 +8,7 @@ cups
 cups-pdf
 filesystem-arkane
 firefox-tweaks-arkane
+firewalld
 flatpak
 flatpak-init-arkane
 fwupd

@@ -2,6 +2,7 @@ NetworkManager.service
 apparmor.service
 bluetooth.service
 cups.service
+firewalld.service
 flatpak-init.service
 fstrim.timer
 gdm.service

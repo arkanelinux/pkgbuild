@@ -1,6 +1,6 @@
 pkgname=os-installer-config
-pkgver=2023.01.03
-pkgrel=5
+pkgver=2023.01.04
+pkgrel=1
 pkgdesc='Default Arkane Linux configuration files for the os-installer'
 url='https://github.com/arkanelinux/pkgbuild/tree/main/os-installer-config'
 arch=('x86_64')
