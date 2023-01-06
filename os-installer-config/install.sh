@@ -27,55 +27,41 @@ fi
 # We will load the partitioning scheme from part.sfdisk
 sudo sfdisk ${OSI_DEVICE_PATH} < /etc/os-installer/bits/part.sfdisk
 
+# Check if NVMe or not
+#
+# NVMe drives follow a slightly different naming scheme to other
+# block devices
+if [[ "${OSI_DEVICE_PATH}" == *"nvme"*"n"* ]];
+then
+	IS_NVME="p"
+else
+	IS_NVME=""
+fi
+
 # Check if encryption is requested and partition accordingly
 if [[ ${OSI_USE_ENCRYPTION} == 1 ]];
 then
-	# Check if drive is NVMe or other
-	if [[ "${OSI_DEVICE_PATH}" == *"nvme"*"n"* ]];
-	then 
-		# Create filesystems on the target NVMe disk
-		sudo mkfs.fat -F32 "${OSI_DEVICE_PATH}p1"
-		sudo mkswap "${OSI_DEVICE_PATH}p2"
-		echo "${OSI_ENCRYPTION_PIN}" | sudo cryptsetup -q luksFormat "${OSI_DEVICE_PATH}p3"
-		echo "${OSI_ENCRYPTION_PIN}" | sudo cryptsetup open "${OSI_DEVICE_PATH}p3" arkane_root -
-		sudo mkfs.btrfs -f -L arkane_root /dev/mapper/arkane_root
-	else
-		# Create filesystems on the target disk
-		sudo mkfs.fat -F32 "${OSI_DEVICE_PATH}1"
-		sudo mkswap "${OSI_DEVICE_PATH}2"
-		echo "${OSI_ENCRYPTION_PIN}" | sudo cryptsetup -q luksFormat "${OSI_DEVICE_PATH}3"
-		echo "${OSI_ENCRYPTION_PIN}" | sudo cryptsetup open "${OSI_DEVICE_PATH}3" arkane_root -
-		sudo mkfs.btrfs -f -L arkane_root /dev/mapper/arkane_root
+	# Create filesystems on the target disk
+	sudo mkfs.fat -F32 "${OSI_DEVICE_PATH}${IS_NVME}1"
+	sudo mkswap "${OSI_DEVICE_PATH}${IS_NVME}2"
+	echo "${OSI_ENCRYPTION_PIN}" | sudo cryptsetup -q luksFormat "${OSI_DEVICE_PATH}${IS_NVME}3"
+	echo "${OSI_ENCRYPTION_PIN}" | sudo cryptsetup open "${OSI_DEVICE_PATH}${IS_NVME}3" arkane_root -
+	sudo mkfs.btrfs -f -L arkane_root /dev/mapper/arkane_root
 
-		# Mount partitions to /mnt and activate swap
-		sudo mount -o compress=zstd /dev/mapper/arkane_root /mnt
-		sudo mount --mkdir "${OSI_DEVICE_PATH}1" /mnt/boot
-		sudo swapon "${OSI_DEVICE_PATH}2"
-	fi
+	# Mount partitions to /mnt and activate swap
+	sudo mount -o compress=zstd /dev/mapper/arkane_root /mnt
+	sudo mount --mkdir "${OSI_DEVICE_PATH}${IS_NVME}1" /mnt/boot
+	sudo swapon "${OSI_DEVICE_PATH}${IS_NVME}2"
 else
-	# Check if drive is NVMe or other
-	if [[ "${OSI_DEVICE_PATH}" == *"nvme"*"n"* ]];
-	then 
-		# Create filesystems on the target NVMe disk
-		sudo mkfs.fat -F32 "${OSI_DEVICE_PATH}p1"
-		sudo mkswap "${OSI_DEVICE_PATH}p2"
-		sudo mkfs.btrfs -L arkane_root "${OSI_DEVICE_PATH}p3"
+	# Create filesystems on the target disk
+	sudo mkfs.fat -F32 "${OSI_DEVICE_PATH}1${IS_NVME}"
+	sudo mkswap "${OSI_DEVICE_PATH}${IS_NVME}2"
+	sudo mkfs.btrfs -L arkane_root "${OSI_DEVICE_PATH}${IS_NVME}3"
 
-		# Mount partitions to /mnt and activate swap
-		sudo mount -o compress=zstd "${OSI_DEVICE_PATH}p3" /mnt
-		sudo mount --mkdir "${OSI_DEVICE_PATH}p1" /mnt/boot
-		sudo swapon "${OSI_DEVICE_PATH}p2"
-	else
-		# Create filesystems on the target disk
-		sudo mkfs.fat -F32 "${OSI_DEVICE_PATH}1"
-		sudo mkswap "${OSI_DEVICE_PATH}2"
-		sudo mkfs.btrfs -L arkane_root "${OSI_DEVICE_PATH}3"
-
-		# Mount partitions to /mnt and activate swap
-		sudo mount -o compress=zstd "${OSI_DEVICE_PATH}3" /mnt
-		sudo mount --mkdir "${OSI_DEVICE_PATH}1" /mnt/boot
-		sudo swapon "${OSI_DEVICE_PATH}2"
-	fi
+	# Mount partitions to /mnt and activate swap
+	sudo mount -o compress=zstd "${OSI_DEVICE_PATH}${IS_NVME}3" /mnt
+	sudo mount --mkdir "${OSI_DEVICE_PATH}${IS_NVME}1" /mnt/boot
+	sudo swapon "${OSI_DEVICE_PATH}${IS_NVME}2"
 fi
 
 # Install base-packages to root
