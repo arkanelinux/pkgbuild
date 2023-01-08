@@ -12,11 +12,10 @@ depends=('gnome-desktop' 'gtk4' 'libadwaita' 'libgweather-4' 'python-yaml' 'udis
 optdepends=('epiphany: online assistance'
             'gnome-disk-utility: manual disk partitioning' 
             'gnome-control-center: Wi-Fi setup')
-sha256sums=(SKIP)
 
 build () {
 	tar xf "$pkgname-$pkgver.tar.gz"
-	cd $srcdir/"$pkgname-$pkgver"
+	cd "$srcdir/$pkgname-$pkgver"
 	
 	meson setup --prefix=/usr build
 }
