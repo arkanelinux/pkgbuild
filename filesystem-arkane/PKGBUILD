@@ -129,5 +129,3 @@ package() {
   # add logo
   install -D -m644 "$srcdir"/arkanelinux-logo{.png,.svg,-text.svg,-text-dark.svg} usr/share/pixmaps
 }
-
-# vim:set ts=2 sw=2 et:
