@@ -26,6 +26,8 @@ gnome-software-packagekit-plugin
 gnome-system-monitor
 gst-libav
 gst-plugins-ugly
+gvfs-goa
+gvfs-google
 libva-mesa-driver
 lsb-release-arkane
 man-db
