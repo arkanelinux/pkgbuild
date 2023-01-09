@@ -6,6 +6,7 @@ bluez-cups
 bluez-plugins
 cups
 cups-pdf
+ffmpegthumbnailer
 filesystem-arkane
 firefox-tweaks-arkane
 firewalld
@@ -23,6 +24,8 @@ gnome-shell
 gnome-software
 gnome-software-packagekit-plugin
 gnome-system-monitor
+gst-libav
+gst-plugins-ugly
 libva-mesa-driver
 lsb-release-arkane
 man-db
