@@ -44,6 +44,7 @@ neovim
 networkmanager
 noto-fonts
 noto-fonts-emoji
+pacman-contrib
 pipewire
 pipewire-alsa
 pipewire-jack

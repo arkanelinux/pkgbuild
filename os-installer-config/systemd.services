@@ -6,3 +6,4 @@ firewalld.service
 flatpak-init.service
 fstrim.timer
 gdm.service
+paccache.timer
