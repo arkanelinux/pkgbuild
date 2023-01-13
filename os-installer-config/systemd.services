@@ -7,3 +7,4 @@ flatpak-init.service
 fstrim.timer
 gdm.service
 paccache.timer
+systemd-boot-update.service
