@@ -1,0 +1,23 @@
+pkgname=arkane-wallpapers
+pkgver=2023.01.15
+pkgrel=1
+pkgdesc='A collection of Arkane Linux themed wallpapers'
+url='https://github.com/arkanelinux/artwork/'
+arch=('any')
+license=('CC BY-SA 4.0')
+source=('https://github.com/arkanelinux/artwork/tarball/master')
+sha256sums=('SKIP')
+
+package() {
+	cd "$pkgdir"
+
+	install -d usr/share/backgrounds/arkane
+	install -d usr/share/gnome-background-properties
+
+	install -m644 $srcdir/arkanelinux-artwork-*/wallpapers/digital_fox/digital_fox.xml usr/share/gnome-background-properties/
+
+	for f in digital_fox-l.webp digital_fox-d.webp; do
+		install -m644 $srcdir/arkanelinux-artwork-*/wallpapers/digital_fox/$f usr/share/backgrounds/arkane/
+	done
+}
+
