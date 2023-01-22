@@ -1,6 +1,6 @@
 pkgname=arkane-wallpapers
 pkgver=2023.01.15
-pkgrel=1
+pkgrel=2
 pkgdesc='A collection of Arkane Linux themed wallpapers'
 url='https://github.com/arkanelinux/artwork/'
 arch=('any')
