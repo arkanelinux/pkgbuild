@@ -60,6 +60,7 @@ wireplumber
 xdg-desktop-portal-gnome
 xdg-user-dirs
 xdg-user-dirs-gtk
+xdg-utils
 xf86-video-amdgpu
 zsh
 zsh-autosuggestions
