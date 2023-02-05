@@ -29,3 +29,8 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Use colors for ls
 alias ls="ls --color=auto"
+
+# Print username, host and filepath in title bar
+precmd () {
+	printf "\033]0;$(printf "$USER@$HOST " && pwd | sed -e "s;^$HOME;~;")\a"
+}
