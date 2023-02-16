@@ -11,10 +11,10 @@ arch=('x86_64')
 license=('GPL-2.0-or-later')
 makedepends=('meson' 'patch')
 depends=('gnome-desktop' 'gdm')
-optdepends=()
 
 build () {
 	cd "$srcdir"/"$pkgname"
+	git reset --hard c0a080d77b6adbe88bc1730e7c0dd8cbfad5d0d4
 
 	meson --prefix=/usr build
 }
