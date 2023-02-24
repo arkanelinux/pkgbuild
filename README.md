@@ -18,12 +18,13 @@ cd ..
 repo-add arkane.db.tar.zst ./os-installer/os-installer-1.0-1-x86_64.pkg.tar.zst
 ```
 
-## Scripts
-| Script				| Description																																																						|
-| -------------	| ---------------------------------------------------------------------------------------------------------------------	|
-| push_all.sh		| Pushes all packages to the repository, useless for everyone other than those with access to the repository server.		|
-| clear_old.sh	| Removes the arkane.db.old files created after updating the database.																									|
-| add_all.sh		| Adds all build packages to the database.																																							| 
+## Script
+| Script | Description |
+| --- | --- |
+| `toolbox push` | Push all packages to the repository, useless for everyone other than those with access to the repository server |
+| `toolbox build` | Build all packages | 
+| `toolbox add` | Add all build packages to the database | 
+| `toolbox clear` | Removes the arkane.db.old files created after updating the database |
 
 ## Development
 Contributions, in any form, be it code or ideas are always welcome!
