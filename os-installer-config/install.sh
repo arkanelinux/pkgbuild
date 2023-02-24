@@ -54,7 +54,7 @@ then
 	sudo swapon "${OSI_DEVICE_PATH}${IS_NVME}2"
 else
 	# Create filesystems on the target disk
-	sudo mkfs.fat -F32 "${OSI_DEVICE_PATH}1${IS_NVME}"
+	sudo mkfs.fat -F32 "${OSI_DEVICE_PATH}${IS_NVME}1"
 	sudo mkswap "${OSI_DEVICE_PATH}${IS_NVME}2"
 	sudo mkfs.btrfs -L arkane_root "${OSI_DEVICE_PATH}${IS_NVME}3"
 
