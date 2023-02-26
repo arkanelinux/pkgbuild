@@ -56,7 +56,7 @@ else
 	# Create filesystems on the target disk
 	sudo mkfs.fat -F32 "${OSI_DEVICE_PATH}${IS_NVME}1"
 	sudo mkswap "${OSI_DEVICE_PATH}${IS_NVME}2"
-	sudo mkfs.btrfs -L arkane_root "${OSI_DEVICE_PATH}${IS_NVME}3"
+	sudo mkfs.btrfs -f -L arkane_root "${OSI_DEVICE_PATH}${IS_NVME}3"
 
 	# Mount partitions to /mnt and activate swap
 	sudo mount -o compress=zstd "${OSI_DEVICE_PATH}${IS_NVME}3" /mnt
