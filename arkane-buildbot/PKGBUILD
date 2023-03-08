@@ -1,6 +1,6 @@
 pkgname=arkane-buildbot
-pkgver=8.3.2023
-pkgrel=2
+pkgver=2023.3.8
+pkgrel=1
 pkgdesc="Arkane Linux buildbot program"
 arch=('x86_64')
 url="https://github.com/arkanelinux/buildbot"
