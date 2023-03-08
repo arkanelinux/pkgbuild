@@ -1,0 +1,20 @@
+pkgname=buildbot
+pkgver=8.3.2023
+pkgrel=1
+pkgdesc="Arkane Linux buildbot program"
+arch=('x86_64')
+url="https://github.com/arkanelinux/buildbot"
+license=('BSD-3-Clause')
+depends=('bash')
+source=("git+https://github.com/arkanelinux/buildbot.git")
+sha512sums=('SKIP')
+
+package() {
+	cd "$pkgdir"
+
+	install -d usr/bin
+	install -d etc/buildbot
+
+	install -m644 "$srcdir"/"$pkgname"/src/buildbot.sh usr/bin/
+	install -m644 "$srcdir"/"$pkgname"/src/config etc/buildbot/
+}
