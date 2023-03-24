@@ -1,5 +1,5 @@
 pkgname=arkane-buildbot
-pkgver=2023.3.8
+pkgver=2023.3.24
 pkgrel=1
 pkgdesc="Arkane Linux buildbot program"
 arch=('x86_64')
@@ -13,8 +13,15 @@ package() {
 	cd "$pkgdir"
 
 	install -d usr/bin
+	install -d usr/lib/systemd/system
 	install -d etc/buildbot
 
-	install -m755 "$srcdir"/buildbot/src/buildbot.sh usr/bin/
-	install -m644 "$srcdir"/buildbot/src/config etc/buildbot/
+	install -m755 "$srcdir"/buildbot/src/arkane-buildbot usr/bin/
+
+	install -m644 "$srcdir"/buildbot/src/arkane-buildbot@.service usr/lib/systemd/system/
+
+	for f in arkane arch-community arch-packages; do
+		install -m644 "$srcdir"/buildbot/src/"$f" etc/buildbot/
+	done
+
 }
