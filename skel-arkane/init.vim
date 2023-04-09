@@ -4,10 +4,10 @@ set number
 set showmatch
 set ignorecase
 set smartcase
-set tabstop=2  
-set shiftwidth=2  
-set autoindent  
-set smartindent  
+set tabstop=2
+set shiftwidth=2
+set autoindent
+set smartindent
 set autoindent
 set wildmenu
 set wildmode=longest:full,full
@@ -28,3 +28,6 @@ nnoremap <C-Left> <C-W><C-H>
 
 syntax enable
 colorscheme slate
+
+highlight RedundantSpaces ctermbg=red guibg=red
+match RedundantSpaces /\s\+$/
