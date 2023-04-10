@@ -1,5 +1,5 @@
 pkgname=skel-arkane
-pkgver=2023.02.05
+pkgver=2023.04.10
 pkgrel=1
 pkgdesc='Skel configuration for Arkane Linux'
 url='https://github.com/arkanelinux/pkgbuild/tree/main/skel-arkane'
@@ -7,15 +7,17 @@ arch=('any')
 conlicts=('grml-zsh-config')
 license=('Public domain')
 source=('init.vim' '.zshrc')
-sha256sums=('6f9f17c50e8566fb18960beb05d155b4439b9b42269dd9720f001e91aa50bc8f'
+sha256sums=('6275f4dfada8d8f9132d6d91e1d7fef09970e52497ae6d9ad78fcb46ccca0782'
             '222be4b76ea7a36888cc450789b039c0cd7f5257a70d85aceaf851b19cf53959')
 
 package() {
 	cd "$pkgdir"
 
 	install -d etc/skel/.config/nvim
+	install -d etc/zsh
 
 	install -m644 "$srcdir"/init.vim etc/skel/.config/nvim/
 	install -m644 "$srcdir"/.zshrc etc/skel/
+	install -m644 "$srcdir"/.zshrc etc/zsh/zshrc
 }
 
