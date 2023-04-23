@@ -6,14 +6,14 @@ url='https://gitlab.gnome.org/Incubator/loupe'
 source=("https://gitlab.gnome.org/Incubator/loupe/-/archive/${pkgver}/loupe-${pkgver}.zip")
 sha256sums=('b9ac60217b131ac3d9e441db4ab79c301306b3ccbc5dba1224a15ac8b767a8f6')
 arch=('x86_64')
-license=('GPL')
+license=('GPL3')
 makedepends=('meson' 'rust' 'cargo')
 depends=('gtk4' 'desktop-file-utils' 'libadwaita' 'libgweather-4' 'libheif' 'glib2' 'gettext')
 
 build () {
 	cd "$srcdir/$pkgname-$pkgver"
 
-	meson setup --prefix=/usr build
+	arch-meson . build --buildtype release
 }
 
 package() {
