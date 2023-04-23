@@ -3,10 +3,8 @@ pkgver=0.9.2
 pkgrel=1
 pkgdesc='A simple image viewer application written with GTK4 and Rust'
 url='https://gitlab.gnome.org/World/amberol/'
-source=("https://gitlab.gnome.org/World/amberol/-/archive/${pkgver}/amberol-${pkgver}.zip"
-        'patch')
-sha256sums=('9e841c0a6679578aca06b2135aa85100dc5a9e9aecf61bc2b7b0887edd3b3f3c'
-            'e7cbaa68545ab0aa0feddd45384e96d75da4f9860e20fe02ea310fc16a7fe338')
+source=("https://gitlab.gnome.org/World/amberol/-/archive/${pkgver}/amberol-${pkgver}.zip")
+sha256sums=('9e841c0a6679578aca06b2135aa85100dc5a9e9aecf61bc2b7b0887edd3b3f3c')
 arch=('x86_64')
 license=('GPL3')
 makedepends=('meson' 'rust' 'cargo' 'pkgconf' 'reuse')
