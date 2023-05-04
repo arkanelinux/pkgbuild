@@ -1,12 +1,12 @@
 pkgname=arkane-wallpapers
-pkgver=2023.01.15
-pkgrel=2
+pkgver=1.0
+pkgrel=1
 pkgdesc='A collection of Arkane Linux themed wallpapers'
 url='https://github.com/arkanelinux/artwork/'
 arch=('any')
 license=('CC BY-SA 4.0')
-source=('https://github.com/arkanelinux/artwork/tarball/master')
-sha256sums=('SKIP')
+source=('https://github.com/arkanelinux/artwork/releases/download/arkanelinux-1.0/arkanelinux-artwork-set-1.0.tar.xz')
+sha256sums=('79d063eec782bf8690e98751897d163424939f86c2aaa9cc556484a5c77a3976')
 
 package() {
 	cd "$pkgdir"
@@ -14,10 +14,10 @@ package() {
 	install -d usr/share/backgrounds/arkane
 	install -d usr/share/gnome-background-properties
 
-	install -m644 $srcdir/arkanelinux-artwork-*/wallpapers/digital_fox/digital_fox.xml usr/share/gnome-background-properties/
+	install -m644 $srcdir/wallpapers/digital_fox/digital_fox.xml usr/share/gnome-background-properties/
+	install -m644 $srcdir/wallpapers/starstruck/starstruck.xml usr/share/gnome-background-properties/
 
-	for f in digital_fox-l.webp digital_fox-d.webp; do
-		install -m644 $srcdir/arkanelinux-artwork-*/wallpapers/digital_fox/$f usr/share/backgrounds/arkane/
-	done
+	install -m644 $srcdir/wallpapers/digital_fox/*.webp usr/share/backgrounds/arkane/
+	install -m644 $srcdir/wallpapers/starstruck/*.webp usr/share/backgrounds/arkane/
 }
 
