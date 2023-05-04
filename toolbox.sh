@@ -1,7 +1,10 @@
 #!/usr/bin/bash
 
+repo_name='arkane'
+repo="${USER}@${ARKANE_REPO}${repo_name}/os/x86_64/"
+
 if [[ $1 == 'add' ]]; then
-	repo-add arkane.db.tar.zst ./*/*pkg.tar.zst
+	repo-add $repo_name.db.tar.zst ./*/*pkg.tar.zst
 elif [[ $1 == 'build' ]]; then
 	BASE_DIR=$(pwd)
 
@@ -18,9 +21,8 @@ elif [[ $1 == 'build' ]]; then
 elif [[ $1 == 'clear' ]]; then
 	rm ./*.old
 elif [[ $1 == 'push' ]]; then
-	export repo="${USER}@${ARKANE_REPO}"
 
-	scp ./arkane.* $repo
+	scp ./$repo_name.* $repo
 	scp ./*/*.pkg.tar.zst $repo
 	scp ./*/*.pkg.tar.zst.sig $repo
 else
