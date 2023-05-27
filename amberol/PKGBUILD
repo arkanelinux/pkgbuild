@@ -1,10 +1,10 @@
 pkgname=amberol
-pkgver=0.10.2
+pkgver=0.10.3
 pkgrel=1
 pkgdesc='A small and simple sound and music player that is well integrated with GNOME'
 url='https://gitlab.gnome.org/World/amberol/'
 source=("https://gitlab.gnome.org/World/amberol/-/archive/${pkgver}/amberol-${pkgver}.zip")
-sha256sums=('f734ddd08208865fa5eead8f2c8cbe37240ba81756981591db51ac38643dd0d0')
+sha256sums=('d5c2009c7b55165db21e63450b5cb496c3c3b2debe94d9ba3e769d7b48a7e9cd')
 arch=('x86_64')
 license=('GPL3')
 makedepends=('meson' 'rust' 'cargo' 'pkgconf' 'reuse')
