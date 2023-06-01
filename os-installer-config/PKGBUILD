@@ -1,65 +1,18 @@
 pkgname=os-installer-config
-pkgver=2023.01.31
-pkgrel=2
+pkgver=2023.05.28
+pkgrel=4
 pkgdesc='Default Arkane Linux configuration files for the os-installer'
 url='https://github.com/arkanelinux/pkgbuild/tree/main/os-installer-config'
 arch=('x86_64')
-license=('Public domain')
-makedepends=()
+license=('BSD')
 depends=('os-installer')
-source=('arkane-fallback.conf' 'arkane.conf' 'base-package.list' 'config.yaml'
-        'configure.sh' 'custom.conf' 'install.sh' 'loader.conf' 'package.list'
-        'part.sfdisk' 'prepare.sh' 'systemd.services' '00-favorite-apps'
-        'user')
-sha256sums=('SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP')
+source=('https://github.com/arkanelinux/os-installer-config/archive/refs/heads/main.zip')
+sha256sums=('SKIP')
 
 package() {
 	cd "$pkgdir"
 
-	install -d etc/os-installer/scripts
-	install -d etc/os-installer/icons
-	
-	install -d etc/os-installer/bits/dconf
-	install -d etc/os-installer/bits/gdm
-	install -d etc/os-installer/bits/systemd-boot
-	
-	# /etc/os-installer/
-	install -m644 "$srcdir"/config.yaml etc/os-installer/
-
-	# /etc/os-installer/scripts/bits/gdm
-	install -m644 "$srcdir"/custom.conf etc/os-installer/bits/gdm/ 
-
-	# /etc/os-installer/scripts/bits/gdm
-	for f in 00-favorite-apps user; do
-		install -m644 "$srcdir"/$f etc/os-installer/bits/dconf
-	done
-
-  	# /etc/os-installer/scripts/
-	for f in configure.sh install.sh prepare.sh; do
-		install -m744 "$srcdir"/$f etc/os-installer/scripts/
-	done
-
-	# /etc/os-installer/bits/
-	for f in base-package.list package.list part.sfdisk systemd.services; do
-		install -m644 "$srcdir"/$f etc/os-installer/bits/
-	done
-  	
-  	# /etc/os-installer/bits/systemd-boot/
-	for f in arkane.conf arkane-fallback.conf loader.conf; do
-		install -m644 "$srcdir"/$f etc/os-installer/bits/systemd-boot/
-	done
+	install -d etc/os-installer
+	cp -r $srcdir/os-installer*/* etc/os-installer
 }
 
