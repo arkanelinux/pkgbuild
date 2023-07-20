@@ -1,6 +1,6 @@
 pkgbase=gnome-software
 pkgname=(gnome-software gnome-software-packagekit-plugin)
-pkgver=44.2
+pkgver=44.3
 pkgrel=1
 pkgdesc="GNOME Software Tools"
 url="https://wiki.gnome.org/Apps/Software/"
@@ -35,7 +35,7 @@ optdepends=(
   'malcontent: Parental control plugin'
 )
 groups=(gnome)
-_commit=a4715568eb2e1c01f95b021c4552d887de3ae911  # tags/44.2^0
+_commit=c88656e24c414779c296370f832b51088e64f7a3  # tags/44.3^0
 source=(
   "git+https://gitlab.gnome.org/GNOME/gnome-software.git#commit=$_commit"
   "git+https://gitlab.gnome.org/mwleeds/gnome-pwa-list.git"
