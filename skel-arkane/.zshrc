@@ -3,8 +3,12 @@
 autoload -Uz compinit
 compinit
 
-# Prompt style
-PS1="%n%f@%F{136}%m%f %1~ %#> "
+# Prompt style, when the hostname is set to toolbox it will load a custom promp style, this is useful for containerized development environments
+if [[ ! $HOSTNAME == 'toolbox' ]]; then
+	PS1="%n%f@%F{136}%m%f %1~ %#> "
+else
+	PS1="⬢ %n%f@%F{35}%m%f %1~ %#> "
+fi
 
 # Zsh history
 HISTFILE="$HOME/.zsh_history"
