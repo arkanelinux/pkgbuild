@@ -5,9 +5,9 @@ compinit
 
 # Prompt style, when the hostname is set to toolbox it will load a custom promp style, this is useful for containerized development environments
 if [[ ! $HOSTNAME == 'toolbox' ]]; then
-	PS1="%n%f@%F{136}%m%f %1~ %#> "
+	PS1="%(?..[%F{136}%?%f] )%n%f@%F{136}%m%f %1~ %#> "
 else
-	PS1="⬢ %n%f@%F{35}%m%f %1~ %#> "
+	PS1="⬢%(?..[%F{136}%?%f] )%n%f@%F{35}%m%f %1~ %#> "
 fi
 
 # Zsh history
