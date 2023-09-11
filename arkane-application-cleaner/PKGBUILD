@@ -1,5 +1,5 @@
 pkgname=arkane-application-cleaner
-pkgver=2023.07.18
+pkgver=2023.09.11
 pkgrel=1
 pkgdesc='Hide unwanted .desktop files'
 url='https://github.com/arkanelinux/arkane-application-cleaner'
