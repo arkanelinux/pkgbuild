@@ -7,7 +7,7 @@ compinit
 if [[ ! $HOSTNAME == 'toolbox' ]]; then
 	PS1="%(?..[%F{136}%?%f] )%n%f@%F{136}%m%f %1~ %#> "
 else
-	PS1="⬢%(?..[%F{136}%?%f] )%n%f@%F{35}%m%f %1~ %#> "
+	PS1="⬢ %(?..[%F{136}%?%f] )%n%f@%F{35}%m%f %1~ %#> "
 fi
 
 # Zsh history
