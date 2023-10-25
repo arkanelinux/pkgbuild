@@ -1,12 +1,12 @@
 pkgname=os-installer-config
-pkgver=2023.07.01
-pkgrel=3
+pkgver='v1.0.alpha'
+pkgrel=1
 pkgdesc='Default Arkane Linux configuration files for the os-installer'
 url='https://github.com/arkanelinux/pkgbuild/tree/main/os-installer-config'
 arch=('x86_64')
 license=('BSD')
 depends=('os-installer')
-source=('https://github.com/arkanelinux/os-installer-config/archive/refs/heads/main.zip')
+source=('https://github.com/arkanelinux/os-installer-config/archive/refs/tags/v1.0-alpha.zip')
 sha256sums=('SKIP')
 
 package() {
