@@ -1,21 +1,22 @@
 pkgname=arkdep
-pkgver=2023.09.21
-pkgrel=1
+pkgver=2023.11.13
+pkgrel=2
 pkgdesc='Toolkit for building, deploying and maintaining a btrfs-based multi-root system'
-url='https://github.com/arkanelinux/arkanium'
+url='https://github.com/arkanelinux/arkdep'
 arch=('any')
 license=('GPL3')
-source=('https://github.com/arkanelinux/arkanium/archive/refs/heads/main.zip')
+source=('https://github.com/arkanelinux/arkdep/archive/refs/heads/main.zip')
 sha256sums=('SKIP')
+depends=('curl' 'wget' 'btrfs-progs' 'dracut' 'systemd')
 
 package() {
 	cd $pkgdir
 
-	install -d etc/arkanium
+	install -d etc/arkdep
 	install -d usr/bin
 
-	install -m755 $srcdir/arkanium-main/arkanium-build usr/bin/
-	cp -rv $srcdir/arkanium-main/arkanium-build.d/* etc/arkanium/
-	install -m755 $srcdir/arkanium-main/arkdep usr/bin/
+	install -m755 $srcdir/arkdep-main/arkdep-build usr/bin/
+	cp -rv $srcdir/arkdep-main/arkdep-build.d/* etc/arkdep/
+	install -m755 $srcdir/arkdep-main/arkdep usr/bin/
 }
 
