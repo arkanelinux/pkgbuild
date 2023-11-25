@@ -1,5 +1,5 @@
 pkgname=arkdep
-pkgver=2023.11.19
+pkgver=2023.11.25
 pkgrel=1
 pkgdesc='Toolkit for building, deploying and maintaining a btrfs-based multi-root system'
 url='https://github.com/arkanelinux/arkdep'
