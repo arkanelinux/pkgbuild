@@ -1,10 +1,10 @@
 pkgname=amberol
 pkgver=0.10.3
-pkgrel=1
+pkgrel=2
 pkgdesc='A small and simple sound and music player that is well integrated with GNOME'
 url='https://gitlab.gnome.org/World/amberol/'
-source=("https://gitlab.gnome.org/World/amberol/-/archive/${pkgver}/amberol-${pkgver}.zip")
-sha256sums=('d5c2009c7b55165db21e63450b5cb496c3c3b2debe94d9ba3e769d7b48a7e9cd')
+source=("git+https://gitlab.gnome.org/World/$pkgname.git#tag=$pkgver")
+sha256sums=('SKIP')
 arch=('x86_64')
 license=('GPL3')
 makedepends=('meson' 'rust' 'cargo' 'pkgconf' 'reuse')
@@ -17,13 +17,13 @@ depends=('gtk4' 'desktop-file-utils' 'libadwaita' 'glib2' 'gettext' 'gtk-update-
 #}
 
 build() {
-	cd "$srcdir/$pkgname-$pkgver"
+	cd $srcdir/$pkgname
 
 	arch-meson . build --buildtype release
 }
 
 package() {
-	cd "$srcdir/$pkgname-$pkgver"
+	cd $srcdir/$pkgname
 
 	meson install -C build --destdir $pkgdir
 }
