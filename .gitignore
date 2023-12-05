@@ -10,3 +10,13 @@ pkg
 /*/main
 gnome-kiosk/gnome-kiosk
 /*/lsb-samples
+amberol/amberol/
+arkane-application-cleaner/arkane-application-cleaner/
+arkdep/arkdep/
+gnome-software/gnome-pwa-list/
+gnome-software/gnome-software/
+*/*.zip
+mutter-dynamic-buffering/mutter-dynamic-buffering/
+os-installer-config-arkdep/os-installer-config-arkdep/
+os-installer-config/os-installer-config/
+skel-arkane/skel-arkane/
