@@ -1,11 +1,11 @@
 pkgname=arkdep
-pkgver=2023.11.25
+pkgver=2023.12.05
 pkgrel=1
 pkgdesc='Toolkit for building, deploying and maintaining a btrfs-based multi-root system'
 url='https://github.com/arkanelinux/arkdep'
 arch=('any')
 license=('GPL3')
-source=('https://github.com/arkanelinux/arkdep/archive/refs/heads/main.zip')
+source=("git+https://github.com/arkanelinux/$pkgname.git")
 sha256sums=('SKIP')
 depends=('curl' 'wget' 'btrfs-progs' 'dracut' 'systemd')
 
@@ -15,8 +15,8 @@ package() {
 	install -d etc/arkdep
 	install -d usr/bin
 
-	install -m755 $srcdir/arkdep-main/arkdep-build usr/bin/
-	cp -rv $srcdir/arkdep-main/arkdep-build.d/* etc/arkdep/
-	install -m755 $srcdir/arkdep-main/arkdep usr/bin/
+	install -m755 $srcdir/arkdep/arkdep-build usr/bin/
+	cp -rv $srcdir/arkdep/arkdep-build.d/* etc/arkdep/
+	install -m755 $srcdir/arkdep/arkdep usr/bin/
 }
 
