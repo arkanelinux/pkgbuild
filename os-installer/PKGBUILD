@@ -1,27 +1,26 @@
 pkgname=os-installer
 pkgver=0.3
-pkgrel=3
+pkgrel=4
 pkgdesc='Operating system installer by the GNOME project'
 url='https://gitlab.gnome.org/p3732/os-installer'
-source=("https://gitlab.gnome.org/p3732/os-installer/-/archive/0.3/os-installer-0.3.tar.gz")
-sha256sums=('8a37e5077b37d7a08c3347a79b4fab25334447f975f0baf943c899eec339a9ba')
+source=("git+https://gitlab.gnome.org/p3732/$pkgname.git#tag=$pkgver")
+sha256sums=('SKIP')
 arch=('x86_64')
 license=('GPL-3.0-or-later')
-makedepends=('gnome-desktop' 'gtk4' 'libadwaita' 'libgweather-4' 'python-yaml' 'udisks2' 'vte4' 'meson')
+makedepends=('meson' 'appstream-glib')
 depends=('gnome-desktop' 'gtk4' 'libadwaita' 'libgweather-4' 'python-yaml' 'udisks2' 'vte4' 'python-gobject')
 optdepends=('epiphany: online assistance'
-            'gnome-disk-utility: manual disk partitioning' 
+            'gnome-disk-utility: manual disk partitioning'
             'gnome-control-center: Wi-Fi setup')
 
 build () {
-	tar xf "$pkgname-$pkgver.tar.gz"
-	cd "$srcdir/$pkgname-$pkgver"
-	
+	cd $srcdir/$pkgname
+
 	meson setup --prefix=/usr build
 }
 
 package() {
-	cd "$srcdir/$pkgname-$pkgver"
+	cd $srcdir/$pkgname
 
 	meson install -C build --destdir $pkgdir
 }
