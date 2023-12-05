@@ -1,24 +1,24 @@
 pkgname=arkane-application-cleaner
-pkgver=2023.09.11
-pkgrel=2
+pkgver=2023.12.05
+pkgrel=1
 pkgdesc='Hide unwanted .desktop files'
 url='https://github.com/arkanelinux/arkane-application-cleaner'
 arch=('any')
-license=('BSD')
-source=('arkane-application-cleaner::git+https://github.com/arkanelinux/arkane-application-cleaner.git')
+license=('BSD3')
+source=("git+https://github.com/arkanelinux/$pkgname.git#tag=$pkgver")
 sha256sums=('SKIP')
 
 package() {
-	cd "$pkgdir"
+	cd $pkgdir
 
 	install -d usr/bin/
 	install -d usr/lib/systemd/system/
 	install -d usr/share/libalpm/hooks/
 	install -d etc/arkane/application-cleaner/
 
-	install -m755 "$srcdir"/"$pkgname"/src/arkane-application-cleaner usr/bin/
-	install -m644 "$srcdir"/"$pkgname"/arkane-application-cleaner.service usr/lib/systemd/system/
-	install -m644 "$srcdir"/"$pkgname"/arkane-application-cleaner.hook usr/share/libalpm/hooks/
-	install -m644 "$srcdir"/"$pkgname"/configs/* etc/arkane/application-cleaner/
+	install -m755 $srcdir/$pkgname/src/arkane-application-cleaner usr/bin/
+	install -m644 $srcdir/$pkgname/arkane-application-cleaner.service usr/lib/systemd/system/
+	install -m644 $srcdir/$pkgname/arkane-application-cleaner.hook usr/share/libalpm/hooks/
+	install -m644 $srcdir/$pkgname/configs/* etc/arkane/application-cleaner/
 }
 
