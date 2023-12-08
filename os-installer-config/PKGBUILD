@@ -1,16 +1,16 @@
 pkgname=os-installer-config
 pkgver='v1.1.alpha'
 _pkgver='v1.1-alpha'
-pkgrel=2
+pkgrel=3
 pkgdesc='Default Arkane Linux configuration files for the os-installer'
 url='https://github.com/arkanelinux/pkgbuild/tree/main/os-installer-config'
 arch=('x86_64')
-license=('BSD3')
+license=('BSD')
 source=("git+https://github.com/arkanelinux/$pkgname.git#tag=$_pkgver")
 sha256sums=('SKIP')
 
 package() {
-	install -d $pkgdir/os-installer
-	cp -r $srcdir/os-installer-config/* $pkgdir/os-installer
+	install -d $pkgdir/etc/os-installer
+	cp -r $srcdir/os-installer-config/* $pkgdir/etc/os-installer
 }
 
