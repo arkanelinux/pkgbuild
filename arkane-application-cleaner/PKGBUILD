@@ -17,7 +17,6 @@ package() {
 	install -d etc/arkane/application-cleaner/
 
 	install -m755 $srcdir/$pkgname/src/arkane-application-cleaner usr/bin/
-	install -m644 $srcdir/$pkgname/arkane-application-cleaner.service usr/lib/systemd/system/
 	install -m644 $srcdir/$pkgname/arkane-application-cleaner.hook usr/share/libalpm/hooks/
 	install -m644 $srcdir/$pkgname/configs/* etc/arkane/application-cleaner/
 }
