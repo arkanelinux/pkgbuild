@@ -1,7 +1,9 @@
+# Maintainer: Dennis ten Hoove <contact@arkanelinux.org>
+
 pkgbase=gnome-software
 pkgname=(gnome-software gnome-software-packagekit-plugin)
-pkgver=45.1
-pkgrel=2
+pkgver=45.3
+pkgrel=1
 pkgdesc="GNOME Software Tools"
 url="https://wiki.gnome.org/Apps/Software/"
 arch=(x86_64)
@@ -35,7 +37,7 @@ optdepends=(
   'malcontent: Parental control plugin'
 )
 groups=(gnome)
-_commit=b615e544ca5804eb660ea9b8e6d55485d2f6cc65
+_commit=f027ac3fc839c0c0fe68006cea1acc757461c128
 source=(
   "git+https://gitlab.gnome.org/GNOME/gnome-software.git#commit=$_commit"
   "git+https://gitlab.gnome.org/mwleeds/gnome-pwa-list.git"
