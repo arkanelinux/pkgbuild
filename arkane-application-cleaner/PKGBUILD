@@ -1,10 +1,10 @@
 pkgname=arkane-application-cleaner
-pkgver=2023.12.05
+pkgver=2024.01.26
 pkgrel=1
 pkgdesc='Hide unwanted .desktop files'
 url='https://github.com/arkanelinux/arkane-application-cleaner'
 arch=('any')
-license=('BSD3')
+license=('BSD')
 source=("git+https://github.com/arkanelinux/$pkgname.git#tag=$pkgver")
 sha256sums=('SKIP')
 
