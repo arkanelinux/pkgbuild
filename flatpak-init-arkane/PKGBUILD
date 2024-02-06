@@ -1,5 +1,7 @@
+# Maintainer: Dennis ten Hoove <contact@arkanelinux.org>
+
 pkgname=flatpak-init-arkane
-pkgver=2023.02.14
+pkgver=2024.02.06
 pkgrel=1
 pkgdesc='Scripts used to install Flatpak applications on first boot'
 url='https://github.com/arkanelinux/flatpak-init-arkane/'
@@ -7,11 +9,11 @@ arch=('x86_64')
 license=('Unlicense')
 depends=('systemd' 'python3' 'flatpak' 'libnotify' 'bash')
 source=("https://github.com/arkanelinux/${pkgname}/tarball/master")
-sha256sums=('ec70b82a290a6171f518fb7005e0ebe25155b88738566d60c064488a371658f3')
+sha256sums=('SKIP')
 
 package() {
 	cd "$pkgdir"
-	
+
 	install -d etc/arkane/flatpak-init
 	install -d usr/bin
 	install -d usr/lib/systemd/system
@@ -20,9 +22,9 @@ package() {
 
 	install -m644 "$srcdir"/arkanelinux-flatpak-init-arkane-*/flatpak-init.service usr/lib/systemd/system/
 	install -m644 "$srcdir"/arkanelinux-flatpak-init-arkane-*/flatpak.list etc/arkane/flatpak-init/
-	
+
 	install -m644 "$srcdir"/arkanelinux-flatpak-init-arkane-*/flatpak-init.desktop etc/xdg/autostart/
-	
+
 	for f in flatpak-init.py flatpak-init.sh; do
 		install -m755 "$srcdir"/arkanelinux-flatpak-init-arkane-*/$f usr/bin/
 	done
