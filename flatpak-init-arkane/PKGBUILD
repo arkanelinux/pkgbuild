@@ -1,13 +1,13 @@
 # Maintainer: Dennis ten Hoove <contact@arkanelinux.org>
 
 pkgname=flatpak-init-arkane
-pkgver=2024.02.06
+pkgver=2024.02.10
 pkgrel=1
 pkgdesc='Scripts used to install Flatpak applications on first boot'
 url='https://github.com/arkanelinux/flatpak-init-arkane/'
 arch=('x86_64')
 license=('Unlicense')
-depends=('systemd' 'python3' 'flatpak' 'libnotify' 'bash')
+depends=('flatpak' 'libnotify')
 source=("https://github.com/arkanelinux/${pkgname}/tarball/master")
 sha256sums=('SKIP')
 
