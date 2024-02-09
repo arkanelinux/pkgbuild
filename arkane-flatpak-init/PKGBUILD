@@ -1,0 +1,31 @@
+# Maintainer: Dennis ten Hoove <contact@arkanelinux.org>
+
+pkgname=arkane-flatpak-init
+pkgver=2024.02.09
+pkgrel=1
+pkgdesc='Scripts used to install Flatpak applications on first boot'
+url='https://github.com/arkanelinux/flatpak-init-arkane/'
+arch=('x86_64')
+license=('Unlicense')
+depends=('flatpak' 'libnotify')
+source=("git+https://github.com/arkanelinux/$pkgname#tag=$pkgver")
+sha256sums=('SKIP')
+
+package() {
+	cd $pkgdir
+
+	install -d etc/arkane/flatpak-init
+	install -d usr/bin
+	install -d usr/lib/systemd/system
+	install -d var/lib/arkane
+	install -d etc/xdg/autostart
+
+	install -m644 $srcdir/$pkgname/arkane-flatpak-init.service usr/lib/systemd/system/
+	install -m644 $srcdir/$pkgname/flatpak.list etc/arkane/flatpak-init/
+
+	install -m644 $srcdir/$pkgname/arkane-flatpak-init-notify.desktop etc/xdg/autostart/
+
+	install -m755 $srcdir/$pkgname/arkane-flatpak-init usr/bin/
+	install -m755 $srcdir/$pkgname/arkane-flatpak-init-notify usr/bin/
+}
+
