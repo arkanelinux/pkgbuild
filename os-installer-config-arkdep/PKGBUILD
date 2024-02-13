@@ -1,6 +1,5 @@
 pkgname=os-installer-config-arkdep
-pkgver='v1.4.alpha'
-_pkgver='v1.4-alpha'
+pkgver='v2.0'
 pkgrel=2
 pkgdesc='Default Arkane Linux configuration files for the os-installer utilizing arkdep'
 url='https://github.com/arkanelinux/pkgbuild/tree/main/os-installer-config-arkdep'
@@ -8,7 +7,7 @@ arch=('x86_64')
 license=('BSD')
 provides=('os-installer-config')
 conflicts=('os-installer-config')
-source=("git+https://github.com/arkanelinux/$pkgname.git#tag=$_pkgver")
+source=("git+https://github.com/arkanelinux/$pkgname.git#tag=$pkgver")
 sha256sums=('SKIP')
 
 package() {
