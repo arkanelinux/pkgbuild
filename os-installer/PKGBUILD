@@ -1,12 +1,13 @@
+# Maintainer: Dennis ten Hoove <contact@arkanelinux.org>
 pkgname=os-installer
-pkgver=0.3
-pkgrel=4
+pkgver=0.3.1
+pkgrel=1
 pkgdesc='Operating system installer by the GNOME project'
 url='https://gitlab.gnome.org/p3732/os-installer'
 source=("git+https://gitlab.gnome.org/p3732/$pkgname.git#tag=$pkgver")
 sha256sums=('SKIP')
 arch=('x86_64')
-license=('GPL-3.0-or-later')
+license=('GPL3')
 makedepends=('meson' 'appstream-glib')
 depends=('gnome-desktop' 'gtk4' 'libadwaita' 'libgweather-4' 'python-yaml' 'udisks2' 'vte4' 'python-gobject')
 optdepends=('epiphany: online assistance'
@@ -15,12 +16,10 @@ optdepends=('epiphany: online assistance'
 
 build () {
 	cd $srcdir/$pkgname
-
 	meson setup --prefix=/usr build
 }
 
 package() {
 	cd $srcdir/$pkgname
-
 	meson install -C build --destdir $pkgdir
 }
