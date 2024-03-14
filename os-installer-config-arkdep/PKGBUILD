@@ -1,6 +1,6 @@
 pkgname=os-installer-config-arkdep
-pkgver='v2.0'
-pkgrel=4
+pkgver='v2.1'
+pkgrel=1
 pkgdesc='Default Arkane Linux configuration files for the os-installer utilizing arkdep'
 url='https://github.com/arkanelinux/pkgbuild/tree/main/os-installer-config-arkdep'
 arch=('x86_64')
