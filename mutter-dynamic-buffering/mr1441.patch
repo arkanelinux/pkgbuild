@@ -2309,3 +2309,4 @@ index 90ea9b581..aafa682bd 100644
 +    .number_of_frames_left = N_FRAMES_PER_TEST,
      .loop = g_main_loop_new (NULL, FALSE),
    };
+ 
