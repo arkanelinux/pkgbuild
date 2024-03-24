@@ -2,7 +2,7 @@
 
 pkgbase=gnome-software
 pkgname=(gnome-software gnome-software-packagekit-plugin)
-pkgver=45.3
+pkgver=46.0
 pkgrel=1
 pkgdesc="GNOME Software Tools"
 url="https://wiki.gnome.org/Apps/Software/"
@@ -17,8 +17,8 @@ depends=(
   libsysprof-capture
   libxmlb
   polkit
-	libglib-testing
 	libpackagekit-glib
+	python-packaging
 )
 makedepends=(
   docbook-xsl
@@ -37,26 +37,21 @@ optdepends=(
   'malcontent: Parental control plugin'
 )
 groups=(gnome)
-_commit=f027ac3fc839c0c0fe68006cea1acc757461c128
+_commit=9dec134914268d135a6f5251ddd624fef2de3c10
 source=(
   "git+https://gitlab.gnome.org/GNOME/gnome-software.git#commit=$_commit"
   "git+https://gitlab.gnome.org/mwleeds/gnome-pwa-list.git"
-	'appstream-1.0.patch'
 )
 b2sums=('SKIP'
-        'SKIP'
-				'a110ec8e08f1c952c3ccf64cede202206cc1cbf95ead1b6f6224e5c1fb9d393904703cce03a248520cc4221f8a2fe5c85ca8a37ff850ed6e3025bb174d69f724')
+        'SKIP')
 
 pkgver() {
   cd $pkgbase
-  git describe --tags | sed 's/[^-]*-g/r&/;s/-/+/g'
+	git describe --tags | sed -r 's/\.([a-z])/\1/;s/([a-z])\./\1/;s/[^-]*-g/r&/;s/-/+/g'
 }
 
 prepare() {
   cd $pkgbase
-
-	# support appstream 1.0
-	patch -p1 < ../appstream-1.0.patch
 
   git submodule init
   git submodule set-url subprojects/gnome-pwa-list "$srcdir/gnome-pwa-list"
