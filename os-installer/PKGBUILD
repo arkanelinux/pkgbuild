@@ -8,7 +8,7 @@ source=("git+https://gitlab.gnome.org/p3732/$pkgname.git#tag=$pkgver")
 sha256sums=('SKIP')
 arch=('x86_64')
 license=('GPL3')
-makedepends=('meson' 'appstream-glib')
+makedepends=('meson' 'appstream-glib' 'blueprint-compiler')
 depends=('gnome-desktop' 'gtk4' 'libadwaita' 'libgweather-4' 'python-yaml' 'udisks2' 'vte4' 'python-gobject')
 optdepends=('epiphany: online assistance'
             'gnome-disk-utility: manual disk partitioning'
