@@ -1,82 +1,74 @@
+# Maintainer: Dennis ten Hoove <contact@arkanelinux.org>
+
 pkgname=plymouth
-pkgver=22.02.122
-pkgrel=9
-pkgdesc="A graphical boot splash screen with kernel mode-setting support"
-url="https://www.freedesktop.org/wiki/Software/Plymouth/"
-arch=('i686' 'x86_64')
-license=('GPL')
-
-depends=('libdrm' 'pango' 'systemd')
-makedepends=('docbook-xsl')
-optdepends=('cantarell-fonts: For text output, e.g. during decryption'
-        'xf86-video-fbdev: Support special graphic cards on early startup')
+pkgver=24.004.60
+pkgrel=6
+pkgdesc='Graphical boot splash screen'
+arch=('x86_64')
+url='https://www.freedesktop.org/wiki/Software/Plymouth/'
+license=('GPL-2.0-or-later')
+depends=('bash' 'cairo' 'cantarell-fonts' 'filesystem' 'fontconfig' 'freetype2' 'glib2' 'glibc'
+         'libdrm' 'libevdev' 'libpng' 'libx11' 'libxkbcommon' 'pango' 'systemd-libs'
+         'xkeyboard-config')
+makedepends=('gtk3' 'docbook-xsl' 'meson')
+optdepends=('gtk3: x11 renderer')
 backup=('etc/plymouth/plymouthd.conf')
-
-source=("https://gitlab.freedesktop.org/${pkgname}/${pkgname}/-/archive/${pkgver}/${pkgname}-${pkgver}.tar.gz"
-        "https://github.com/arkanelinux/plymouth/tarball/master")
-
-sha256sums=('8921cd61a9f32f5f8903ceffb9ab0defaef8326253e1549ef85587c19b7f2ab6'
-            'SKIP')
+install='plymouth.install'
+source=("https://www.freedesktop.org/software/$pkgname/releases/$pkgname-$pkgver.tar.xz"
+        '0001-label-freetype-fix-fallback-not-working-when-fc-matc.patch'
+        '0001-renderers-Do-not-assume-all-keyboards-have-LEDs.patch'
+        '0001-ply-boot-splash-Set-unbuffered-input-when-creating-a.patch'
+        'plymouth.initcpio_hook'
+        'plymouth.initcpio_install'
+        'plymouth-shutdown.initcpio_install'
+        'mkinitcpio-generate-shutdown-ramfs-plymouth.conf'
+        'arkanelinux-logo.png')
+sha256sums=('f3f7841358c98f5e7b06a9eedbdd5e6882fd9f38bbd14a767fb083e3b55b1c34'
+            '9d5feec6980fb878b827bf8b4df236783afacf9e0d1d47daaad915b8f9702441'
+            '0c99366046ac68377ee0348263a535bb06a935cbe0457f254a9f8e2a422edf0c'
+            'a261cf07ec57d7cb230b589e7f85a3080125b89248b1fb6191bc38aefc24076e'
+            'de852646e615e06d4125eb2e646d0528d1e349bd9e9877c08c5d32c43d288b6f'
+            'ecd979b70a613b6aea05443da735e95a8c7341fbc9f099da807bd82394f5d3cf'
+            'd75b67c7c28698c1e27864a63f3f405897aea053c346c2478ee97d0caec241d5'
+            '04af86a0ec83fc92d7339e1a7fcc0d55b86b95797a1a5f1a3b8d850996a3926c'
+            'a1d5e5538146bc56a1b63352efd36a82a0ea5ceca5f8ee1923ab53c3decc9df4')
 
 prepare() {
-	tar xf master
-	cp arkanelinux-plymouth-*/* .
+  cd $pkgname-$pkgver
+  # https://gitlab.freedesktop.org/plymouth/plymouth/-/merge_requests/302
+  patch -Np1 -i ../0001-label-freetype-fix-fallback-not-working-when-fc-matc.patch
 
-	cd "$srcdir"/${pkgname}-${pkgver}
-	patch -p1 -i $srcdir/plymouth-update-initrd.patch
-	patch -p1 -i $srcdir/plymouth-quit.service.in.patch
-	patch -p1 -i $srcdir/plymouthd.conf.patch
-	# apply upstream patches
-	patch -p1 -i $srcdir/ply-utils.c.patch
-	patch -p1 -i $srcdir/runstatedir.patch
+  # https://gitlab.freedesktop.org/plymouth/plymouth/-/merge_requests/304
+  patch -Np1 -i ../0001-renderers-Do-not-assume-all-keyboards-have-LEDs.patch
+
+  # https://gitlab.freedesktop.org/plymouth/plymouth/-/merge_requests/303
+  patch -Np1 -i ../0001-ply-boot-splash-Set-unbuffered-input-when-creating-a.patch
+
+  # Use mkinitcpio to update initrd
+  sed -i 's/^dracut -f$/mkinitcpio -P/' scripts/plymouth-update-initrd
+
+  # Change default theme
+  sed -i 's/^Theme=spinner$/Theme=bgrt/' src/plymouthd.defaults
 }
 
 build() {
-	cd "$srcdir"/${pkgname}-${pkgver}
-
-	LDFLAGS="$LDFLAGS -ludev" ./autogen.sh \
-		--prefix=/usr \
-		--exec-prefix=/usr \
-		--sysconfdir=/etc \
-		--localstatedir=/var \
-		--libdir=/usr/lib \
-		--libexecdir=/usr/lib \
-		--sbindir=/usr/bin \
-		--enable-systemd-integration \
-		--enable-drm \
-		--enable-tracing \
-		--enable-pango \
-		--enable-gtk=no \
-		--with-release-file=/etc/os-release \
-		--with-logo=/usr/share/plymouth/arkanelinux-logo.png \
-		--with-background-color=0x000000 \
-		--with-background-start-color-stop=0x000000 \
-		--with-background-end-color-stop=0x4D4D4D \
-		--without-rhgb-compat-link \
-		--without-system-root-install \
-		--runstatedir=/run
-
-	make
+  arch-meson build $pkgname-$pkgver \
+    -D logo=/usr/share/pixmaps/arkanelinux-logo.png
+  meson compile -C build
 }
 
 package() {
-	cd "$srcdir"/${pkgname}-${pkgver}
+  meson install -C build --destdir "$pkgdir"
+  rm -r "$pkgdir/run"
 
-	make DESTDIR="$pkgdir" install
+  # Install mkinitcpio hook
+  install -Dm644 plymouth.initcpio_hook "$pkgdir/usr/lib/initcpio/hooks/$pkgname"
+  install -Dm644 plymouth.initcpio_install "$pkgdir/usr/lib/initcpio/install/$pkgname"
 
-	install -Dm644 "$srcdir/arkanelinux-logo.png" "$pkgdir/usr/share/plymouth/arkanelinux-logo.png"
-	ln -s ../../arkanelinux-logo.png "$pkgdir/usr/share/plymouth/themes/spinner/watermark.png"
+  # Install mkinitcpio shutdown hook and systemd drop-in snippet
+  install -Dm644 plymouth-shutdown.initcpio_install "$pkgdir/usr/lib/initcpio/install/$pkgname-shutdown"
+  install -Dm644 mkinitcpio-generate-shutdown-ramfs-plymouth.conf "$pkgdir/usr/lib/systemd/system/mkinitcpio-generate-shutdown-ramfs.service.d/plymouth.conf"
 
-	install -Dm644 "$srcdir/plymouth.encrypt_hook" "$pkgdir/usr/lib/initcpio/hooks/plymouth-encrypt"
-	install -Dm644 "$srcdir/plymouth.encrypt_install" "$pkgdir/usr/lib/initcpio/install/plymouth-encrypt"
-	install -Dm644 "$srcdir/plymouth.initcpio_hook" "$pkgdir/usr/lib/initcpio/hooks/plymouth"
-	install -Dm644 "$srcdir/plymouth.initcpio_install" "$pkgdir/usr/lib/initcpio/install/plymouth"
-	install -Dm644 "$srcdir/sd-plymouth.initcpio_install" "$pkgdir/usr/lib/initcpio/install/sd-plymouth"
-
-	for i in {sddm,lxdm,lightdm}-plymouth.service; do
-		install -Dm644 "$srcdir/$i" "$pkgdir/usr/lib/systemd/system/$i"
-	done
-
-	install -Dm644 "$srcdir/plymouth-deactivate.service" 	"$pkgdir/usr/lib/systemd/system/plymouth-deactivate.service"
-	install -Dm644 "$pkgdir/usr/share/plymouth/plymouthd.defaults" "$pkgdir/etc/plymouth/plymouthd.conf"
+  # Install logo for the spinner theme
+  install -Dm644 arkanelinux-logo.png "$pkgdir/usr/share/$pkgname/themes/spinner/watermark.png"
 }
