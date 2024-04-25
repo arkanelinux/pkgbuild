@@ -2,7 +2,7 @@
 
 pkgname=plymouth
 pkgver=24.004.60
-pkgrel=6
+pkgrel=7
 pkgdesc='Graphical boot splash screen'
 arch=('x86_64')
 url='https://www.freedesktop.org/wiki/Software/Plymouth/'
@@ -43,12 +43,6 @@ prepare() {
 
   # https://gitlab.freedesktop.org/plymouth/plymouth/-/merge_requests/303
   patch -Np1 -i ../0001-ply-boot-splash-Set-unbuffered-input-when-creating-a.patch
-
-  # Use mkinitcpio to update initrd
-  sed -i 's/^dracut -f$/mkinitcpio -P/' scripts/plymouth-update-initrd
-
-  # Change default theme
-  sed -i 's/^Theme=spinner$/Theme=bgrt/' src/plymouthd.defaults
 }
 
 build() {
