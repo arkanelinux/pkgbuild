@@ -1,6 +1,6 @@
 # Maintainer: Dennis ten Hoove <contact@arkanelinux.org>
 pkgname=filesystem
-pkgver=2024.01.11
+pkgver=2024.06.17
 pkgrel=1
 pkgdesc='Base Arkane Linux files'
 arch=('any')
@@ -41,8 +41,8 @@ sha256sums=('e03bede3d258d680548696623d5979c6edf03272e801a813c81ba5a5c64f4f82'
             'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
             '9e2ae83deeaf2e482c34a6ebcb903210dd00218487da67312b2be3ebdfbdeefd'
             'c5a526edf9682c205769234e742395c9df09aa5cbe0dc651ec617aa630d121b1'
-            '789563636de92ec62d3c9be47cc2bc0aafda58ef9e127c08ee6ef0e0a071f726'
-            'b39fb9f05a639b495d7b4e0254b682ac92c97ffd503b0ad4d54134523dc93143')
+            'a58753c9431a01c553f1f99225381d85bdca6d0808df89f88e2a5b3b1397b5c2'
+            '191e63e50d84475a0e79cacc3725625d9b28ebb26fb06ba84544e3ddce82d1eb')
 
 package() {
   cd "$pkgdir"
