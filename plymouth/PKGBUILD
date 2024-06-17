@@ -2,7 +2,7 @@
 
 pkgname=plymouth
 pkgver=24.004.60
-pkgrel=7
+pkgrel=8
 pkgdesc='Graphical boot splash screen'
 arch=('x86_64')
 url='https://www.freedesktop.org/wiki/Software/Plymouth/'
@@ -31,7 +31,7 @@ sha256sums=('f3f7841358c98f5e7b06a9eedbdd5e6882fd9f38bbd14a767fb083e3b55b1c34'
             'ecd979b70a613b6aea05443da735e95a8c7341fbc9f099da807bd82394f5d3cf'
             'd75b67c7c28698c1e27864a63f3f405897aea053c346c2478ee97d0caec241d5'
             '04af86a0ec83fc92d7339e1a7fcc0d55b86b95797a1a5f1a3b8d850996a3926c'
-            'a1d5e5538146bc56a1b63352efd36a82a0ea5ceca5f8ee1923ab53c3decc9df4')
+            'e939189c299f863b8343d16ecd4331617fb558ad765e5015f25f62eacc9b8f7c')
 
 prepare() {
   cd $pkgname-$pkgver
