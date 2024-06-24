@@ -3,7 +3,7 @@ pkgname='mutter'
 _pkgname='mutter-dynamic-buffering'
 replaces=('mutter-dynamic-buffering')
 pkgver=46.2
-pkgrel=1
+pkgrel=2
 pkgdesc="Window manager and compositor for GNOME (with dynamic triple/double buffering)"
 url="https://gitlab.gnome.org/GNOME/mutter"
 arch=(x86_64)
@@ -67,16 +67,15 @@ depends=(
   xorg-xwayland
 )
 makedepends=(
-	cmake
-	python-packaging
-  egl-wayland
-  gi-docgen
-  git
-  gobject-introspection
-  meson
-  sysprof
-  wayland-protocols
-  patch
+	glib2-devel
+	egl-wayland
+	gi-docgen
+	git
+	gobject-introspection
+	meson
+	patch
+	sysprof
+	wayland-protocols
 )
 _commit=c4753689e3413cd9332d885dd0297b3b7d9ba9ca  # tags/46.0^0
 source=(
