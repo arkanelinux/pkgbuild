@@ -1,7 +1,7 @@
 # Maintainer: Dennis ten Hoove <contact@arkanelinux.org>
 
 pkgname=arkane-flatpak-init
-pkgver=2024.06.15
+pkgver=2024.07.28
 pkgrel=1
 pkgdesc='Scripts used to install Flatpak applications on first boot'
 url='https://github.com/arkanelinux/flatpak-init-arkane/'
