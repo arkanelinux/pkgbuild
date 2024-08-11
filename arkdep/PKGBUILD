@@ -1,7 +1,7 @@
 # Maintainer: Dennis ten Hoove <contact@arkanelinux.org>
 
 pkgname=arkdep
-pkgver=2024.07.27
+pkgver=2024.08.11
 pkgrel=1
 pkgdesc='Toolkit for building, deploying and maintaining a btrfs-based multi-root system'
 url='https://github.com/arkanelinux/arkdep'
@@ -9,7 +9,7 @@ arch=('any')
 license=('GPL3')
 source=("git+https://github.com/arkanelinux/$pkgname.git")
 sha256sums=('SKIP')
-depends=('curl' 'wget' 'btrfs-progs' 'dracut' 'systemd' 'gnupg')
+depends=('curl' 'wget' 'btrfs-progs' 'dracut' 'systemd' 'gnupg' 'diffutils')
 
 package() {
 	cd $pkgdir
