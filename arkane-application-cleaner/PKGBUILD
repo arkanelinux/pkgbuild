@@ -1,7 +1,7 @@
 # Maintainer: Dennis ten Hoove <contact@arkanelinux.org>
 
 pkgname=arkane-application-cleaner
-pkgver=2024.02.08
+pkgver=2024.09.21
 pkgrel=1
 pkgdesc='Hide unwanted .desktop files'
 url='https://github.com/arkanelinux/arkane-application-cleaner'
