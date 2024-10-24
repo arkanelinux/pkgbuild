@@ -1,0 +1,47 @@
+--- scripts/list_disk_devices.py	2024-10-24 22:27:51.820488041 +0200
++++ scripts/list_disk_devices.py	2024-10-24 22:27:58.357059724 +0200
+@@ -24,29 +24,43 @@
+ for device in devices:
+     udisks_object = udisks_client.get_object(device)
+     if not udisks_object:
++        print(f'No udisks object: {device}')
+         continue
+ 
+     partition = udisks_object.get_partition()
+     if partition:
++        block = udisks_object.get_block()
++        drive = udisks_client.get_drive_for_block(block)
++        print(f'Is a partition: ({drive.props.vendor} {drive.props.model})')
+         continue
+ 
+     block = udisks_object.get_block()
+     partition_table = udisks_object.get_partition_table()
+     if not block:
++        print(f'No block for {udisks_object}')
++        print(f'  partition table: {partition_table}')
+         continue
+ 
+     drive = udisks_client.get_drive_for_block(block)
+-    if not drive or drive.props.size <= 0 or drive.props.optical:
++    if not drive:
++        print(f'Not a drive: {block}')
+         continue
++    if drive.props.optical:
++        print(f'Drive is considered optical ({drive.props.vendor} {drive.props.model})')
++        continue
++    if drive.props.size <= 0:
++        print(f'(ignored) drive is of size {drive.props.size} ({drive.props.vendor} {drive.props.model})')
+ 
+     print(f'* Disk ({drive.props.vendor} {drive.props.model}), '
+           f'size {size_to_str(block.props.size)}, path {block.props.device}:')
+ 
+     if not partition_table:
++        print('  drive has no partition table')
+         continue
+     for partition_name in partition_table.props.partitions:
+         partition_object = udisks_client.get_object(partition_name)
+         if not partition_object:
++            print(f'  no udisks object for partition {partition_name}')
+             continue
+ 
+         block = partition_object.get_block()
