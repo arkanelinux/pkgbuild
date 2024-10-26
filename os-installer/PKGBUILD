@@ -1,12 +1,12 @@
 # Maintainer: Dennis ten Hoove <contact@arkanelinux.org>
 pkgname=os-installer
 pkgver=0.3.1
-pkgrel=2
+pkgrel=4
 pkgdesc='Operating system installer by the GNOME project'
 url='https://gitlab.gnome.org/p3732/os-installer'
 source=("git+https://gitlab.gnome.org/p3732/$pkgname.git#tag=$pkgver"
         'list_disk_if_zero.patch')
-sha256sums=('SKIP' 'd7e656ce95b2bf4492f258ed76599f1250d1390c926f009ec46d1a303417842c')
+sha256sums=('SKIP' '726189d3b61233c9ec6d75522c99f9b14f47a56674150d2fcb7029e265df42c9')
 arch=('x86_64')
 license=('GPL3')
 makedepends=('meson' 'appstream-glib' 'blueprint-compiler')
@@ -17,9 +17,7 @@ optdepends=('epiphany: online assistance'
 
 prepare () {
 	cd $srcdir/$pkgname
-	pwd
-
-	patch -p0 < $srcdir/list_disk_if_zero.patch
+	patch -p1 < $srcdir/list_disk_if_zero.patch
 }
 
 build () {

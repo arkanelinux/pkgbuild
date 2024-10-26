@@ -1,47 +1,40 @@
---- scripts/list_disk_devices.py	2024-10-24 22:27:51.820488041 +0200
-+++ scripts/list_disk_devices.py	2024-10-24 22:27:58.357059724 +0200
-@@ -24,29 +24,43 @@
- for device in devices:
-     udisks_object = udisks_client.get_object(device)
-     if not udisks_object:
-+        print(f'No udisks object: {device}')
-         continue
+From 74c0d6d2d71a5265bfd0915eb0a4ec0f478c992f Mon Sep 17 00:00:00 2001
+From: Dennis ten Hoove <dennistenhoove@protonmail.com>
+Date: Sat, 26 Oct 2024 17:09:40 +0200
+Subject: [PATCH] Backport disk: "Allow usage of disks that dont properly
+ report size"
+
+---
+ src/provider/disk_provider.py | 2 +-
+ src/ui/pages/disk.py          | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/provider/disk_provider.py b/src/provider/disk_provider.py
+index 6cb12e0..e08a897 100644
+--- a/src/provider/disk_provider.py
++++ b/src/provider/disk_provider.py
+@@ -129,7 +129,7 @@ class DiskProvider(Preloadable):
  
-     partition = udisks_object.get_partition()
-     if partition:
-+        block = udisks_object.get_block()
-+        drive = udisks_client.get_drive_for_block(block)
-+        print(f'Is a partition: ({drive.props.vendor} {drive.props.model})')
-         continue
+             partition_table = udisks_object.get_partition_table()
+             drive = self.udisks_client.get_drive_for_block(block)
+-            if drive and drive.props.size > 0 and not drive.props.optical:
++            if drive and not drive.props.optical:
+                 disk_info = self._get_disk_info(block, drive, partition_table)
+                 disks.append(disk_info)
  
-     block = udisks_object.get_block()
-     partition_table = udisks_object.get_partition_table()
-     if not block:
-+        print(f'No block for {udisks_object}')
-+        print(f'  partition table: {partition_table}')
-         continue
+diff --git a/src/ui/pages/disk.py b/src/ui/pages/disk.py
+index 228acd7..cfef77a 100644
+--- a/src/ui/pages/disk.py
++++ b/src/ui/pages/disk.py
+@@ -46,7 +46,7 @@ class DiskPage(Gtk.Stack, Page):
+         self.partition_list.bind_model(self.partition_list_model, self._create_device_row)
  
-     drive = udisks_client.get_drive_for_block(block)
--    if not drive or drive.props.size <= 0 or drive.props.optical:
-+    if not drive:
-+        print(f'Not a drive: {block}')
-         continue
-+    if drive.props.optical:
-+        print(f'Drive is considered optical ({drive.props.vendor} {drive.props.model})')
-+        continue
-+    if drive.props.size <= 0:
-+        print(f'(ignored) drive is of size {drive.props.size} ({drive.props.vendor} {drive.props.model})')
- 
-     print(f'* Disk ({drive.props.vendor} {drive.props.model}), '
-           f'size {size_to_str(block.props.size)}, path {block.props.device}:')
- 
-     if not partition_table:
-+        print('  drive has no partition table')
-         continue
-     for partition_name in partition_table.props.partitions:
-         partition_object = udisks_client.get_object(partition_name)
-         if not partition_object:
-+            print(f'  no udisks object for partition {partition_name}')
-             continue
- 
-         block = partition_object.get_block()
+     def _create_device_row(self, info):
+-        if info.size >= self.minimum_disk_size:
++        if info.size <= 0 or info.size >= self.minimum_disk_size:
+             return DeviceRow(info)
+         else:
+             required_size_str = disk_provider.disk_size_to_str(self.minimum_disk_size)
+-- 
+2.47.0
+
