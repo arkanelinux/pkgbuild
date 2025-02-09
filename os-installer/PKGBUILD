@@ -10,7 +10,7 @@ sha256sums=('SKIP' '726189d3b61233c9ec6d75522c99f9b14f47a56674150d2fcb7029e265df
 arch=('x86_64')
 license=('GPL3')
 makedepends=('meson' 'appstream-glib' 'blueprint-compiler')
-depends=('gnome-desktop' 'gtk4' 'libadwaita' 'libgweather-4' 'python-yaml' 'udisks2' 'vte4' 'python-gobject')
+depends=('gnome-desktop-4' 'gtk4' 'libadwaita' 'libgweather-4' 'python-yaml' 'udisks2' 'vte4' 'python-gobject')
 optdepends=('epiphany: online assistance'
             'gnome-disk-utility: manual disk partitioning'
             'gnome-control-center: Wi-Fi setup')
