@@ -9,7 +9,7 @@ arch=('any')
 license=('GPL3')
 source=("git+https://github.com/arkanelinux/$pkgname.git#tag=$pkgver")
 sha256sums=('SKIP')
-depends=('curl' 'wget' 'btrfs-progs' 'dracut' 'systemd' 'gnupg')
+depends=('curl' 'wget' 'btrfs-progs' 'dracut' 'systemd' 'gnupg' 'arch-install-scripts')
 
 package() {
 	cd $pkgdir
