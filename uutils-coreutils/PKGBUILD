@@ -7,7 +7,7 @@
 _pkgname=coreutils
 pkgname=uutils-$_pkgname
 pkgver=0.4.0
-pkgrel=1
+pkgrel=2
 pkgdesc='Cross-platform Rust rewrite of the GNU coreutils'
 arch=('x86_64')
 url='https://uutils.github.io/'
@@ -55,7 +55,7 @@ check() {
   make test \
     PROFILE=release \
     CARGOFLAGS=--release \
-    SKIP_UTILS="runcon chcon" \
+    SKIP_UTILS="runcon chcon uptime kill more" \
     TEST_NO_FAIL_FAST="-- \
     --skip test_chgrp::test_from_with_invalid_group \
     --skip test_chmod::test_chmod_colored_output \
@@ -90,11 +90,9 @@ package() {
     PREFIX=/usr \
     LIBSTDBUF_DIR=/usr/lib/uutils-coreutils \
     PROFILE=release \
-    SKIP_UTILS="runcon chcon" \
+    SKIP_UTILS="runcon chcon uptime kill more" \
     MULTICALL=y
   install -Dm 644 LICENSE "$pkgdir"/usr/share/licenses/$pkgname/LICENSE
-  # fix missing symlinks
-  cd "$pkgdir"/usr/bin/
 }
 
 # vim: ts=2 sw=2 et:

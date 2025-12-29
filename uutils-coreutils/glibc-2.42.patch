@@ -1,0 +1,48 @@
+Description: Support glibc 2.42
+ The speed_t definition has changed in glibc 2.42
+ .
+ This is not upstreamable in this shape...
+Author: Julian Andres Klode <julian.klode@canonical.com>
+Bug: https://github.com/nix-rust/nix/issues/2672
+Bug: https://github.com/uutils/coreutils/issues/8474
+Bug-Ubuntu: https://bugs.launchpad.net/ubuntu/+source/rust-coreutils/+bug/2121635
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/rust-vendor/nix/src/sys/termios.rs
++++ b/rust-vendor/nix/src/sys/termios.rs
+@@ -337,7 +337,7 @@ libc_enum! {
+     impl TryFrom<libc::speed_t>
+ }
+ 
+-#[cfg(bsd)]
++#[cfg(any(bsd, linux_android))]
+ impl From<BaudRate> for u32 {
+     fn from(b: BaudRate) -> u32 {
+         b as u32
+@@ -690,7 +690,7 @@ libc_bitflags! {
+ }
+ 
+ cfg_if! {
+-    if #[cfg(bsd)] {
++    if #[cfg(any(bsd, linux_android))] {
+         /// Get input baud rate (see
+         /// [cfgetispeed(3p)](https://pubs.opengroup.org/onlinepubs/9699919799/functions/cfgetispeed.html)).
+         ///
+--- a/src/uu/stty/src/stty.rs
++++ b/src/uu/stty/src/stty.rs
+@@ -499,6 +499,7 @@ fn print_terminal_size(termios: &Termios
+ 
+     // BSDs use a u32 for the baud rate, so we can simply print it.
+     #[cfg(any(
++        target_os = "linux",
+         target_os = "freebsd",
+         target_os = "dragonfly",
+         target_os = "ios",
+@@ -511,6 +512,7 @@ fn print_terminal_size(termios: &Termios
+     // Other platforms need to use the baud rate enum, so printing the right value
+     // becomes slightly more complicated.
+     #[cfg(not(any(
++        target_os = "linux",
+         target_os = "freebsd",
+         target_os = "dragonfly",
+         target_os = "ios",
