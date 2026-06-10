@@ -1,7 +1,7 @@
 # Maintainer: Dennis ten Hoove <contact@arkanelinux.org>
 
 pkgname=arkdep
-pkgver=2025.12.18
+pkgver=2026.06.10
 pkgrel=1
 pkgdesc='Toolkit for building, deploying and maintaining a btrfs-based multi-root system'
 url='https://github.com/arkanelinux/arkdep'
@@ -14,12 +14,10 @@ depends=('curl' 'wget' 'btrfs-progs' 'dracut' 'systemd' 'gnupg' 'arch-install-sc
 package() {
 	cd $pkgdir
 
-	install -d etc/arkdep
 	install -d usr/bin
 	install -d usr/share/man/man8
 
 	install -m755 $srcdir/arkdep/arkdep-build usr/bin/
-	cp -r $srcdir/arkdep/arkdep-build.d/* etc/arkdep/
 	install -m755 $srcdir/arkdep/arkdep usr/bin/
 
 	# Compress the manpages
