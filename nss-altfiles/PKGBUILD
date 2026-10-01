@@ -1,0 +1,42 @@
+# Maintainer: Dennis ten Hoove <contact@arkanelinux.org>
+
+pkgname=nss-altfiles
+pkgver=2.43.0
+pkgrel=1
+pkgdesc="NSS module to read passwd/group files from alternate locations"
+arch=(x86_64)
+url="https://github.com/flatcar/nss-altfiles"
+license=('LGPL-2.1-or-later' 'MIT')
+depends=('glibc')
+makedepends=('gcc' 'make' 'git')
+
+_pkgver="v${pkgver}"
+
+source=(
+  "https://github.com/flatcar/nss-altfiles/archive/${_pkgver}.tar.gz"
+)
+
+sha256sums=(
+  '3aca3e163e8ad99beb54b7b21b91d7551cb815526ac6b3a1dfb734d05f387187'
+)
+
+build() {
+  cd "${pkgname}-${pkgver}"
+
+  ./configure \
+    --with-types=all \
+    --prefix=/usr \
+    --libdir=/usr/lib \
+    CFLAGS="${CFLAGS}" \
+    LDFLAGS="${LDFLAGS}"
+
+  make
+}
+
+package() {
+  cd "${pkgname}-${pkgver}"
+
+  make DESTDIR="${pkgdir}" install
+
+  install -Dm644 README.md "${pkgdir}/usr/share/doc/${pkgname}/README.md"
+}
